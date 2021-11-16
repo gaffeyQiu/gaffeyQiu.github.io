@@ -6,7 +6,105 @@
         <description>Recent content on gaffey的开发日志</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 11 Nov 2021 16:17:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 16 Nov 2021 20:34:44 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>VsCode 插件分享</title>
+        <link>https://blog.7bao.fun/p/vscode-%E6%8F%92%E4%BB%B6%E5%88%86%E4%BA%AB/</link>
+        <pubDate>Tue, 16 Nov 2021 20:34:44 +0800</pubDate>
+        
+        <guid>https://blog.7bao.fun/p/vscode-%E6%8F%92%E4%BB%B6%E5%88%86%E4%BA%AB/</guid>
+        <description>&lt;h2 id=&#34;主题类&#34;&gt;主题类&lt;/h2&gt;
+&lt;h3 id=&#34;1-material-icon-theme&#34;&gt;1. Material Icon Theme&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;功能说明: 可以给文件夹和文件自动添加 icon, 这个是同类插件中看起来最舒服的&lt;/li&gt;
+&lt;li&gt;使用说明: 安装完成后即可使用
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;http://cdn.7bao.fun/images/20211116203859.png&#34; &gt;
+		&lt;img src=&#34;http://cdn.7bao.fun/images/20211116203859.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-one-dark-pro&#34;&gt;2. One Dark Pro&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;功能说明: vscode 使用人数比较多的主题&lt;/li&gt;
+&lt;li&gt;使用说明: 安装完成后即可使用
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;http://cdn.7bao.fun/images/20211116204049.png&#34; &gt;
+		&lt;img src=&#34;http://cdn.7bao.fun/images/20211116204049.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-darcula-intellij-theme&#34;&gt;3. Darcula IntelliJ Theme&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;功能说明: 如果你习惯 jetbrains 家的 IDE, 这个 vscode 主题绝对适合你&lt;/li&gt;
+&lt;li&gt;使用说明: 安装完成后即可使用
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;http://cdn.7bao.fun/images/20211116204427.png&#34; &gt;
+		&lt;img src=&#34;http://cdn.7bao.fun/images/20211116204427.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;效率类&#34;&gt;效率类&lt;/h2&gt;
+&lt;h3 id=&#34;1-git-graph&#34;&gt;1. Git Graph&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;功能说明: 一款 git 可视化插件, 非常好看而且实用&lt;/li&gt;
+&lt;li&gt;使用说明: 安装完成后即可使用
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://github.com/mhutchie/vscode-git-graph/raw/master/resources/demo.gif&#34; &gt;
+		&lt;img src=&#34;https://github.com/mhutchie/vscode-git-graph/raw/master/resources/demo.gif&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-docker&#34;&gt;2. Docker&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;功能说明: Dockerfile 提示, 管理本地 docker 服务&lt;/li&gt;
+&lt;li&gt;安装完成后即可使用
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://github.com/microsoft/vscode-docker/raw/HEAD/resources/readme/overview.gif&#34; &gt;
+		&lt;img src=&#34;https://github.com/microsoft/vscode-docker/raw/HEAD/resources/readme/overview.gif&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;hellip;不定期补充&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>HelloBlog</title>
         <link>https://blog.7bao.fun/p/helloblog/</link>
         <pubDate>Thu, 11 Nov 2021 16:17:41 +0800</pubDate>
