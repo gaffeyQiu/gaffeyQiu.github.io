@@ -19,31 +19,35 @@
 &lt;li&gt;使用说明: 安装完成后即可使用
 &lt;figure 
 	&gt;
-	&lt;a href=&#34;http://cdn.7bao.fun/images/20211116203859.png&#34; &gt;
-		&lt;img src=&#34;http://cdn.7bao.fun/images/20211116203859.png&#34;
+	&lt;a href=&#34;https://i.loli.net/2021/11/16/rFN4P3ZsmhDf9RK.png&#34; &gt;
+		&lt;img src=&#34;https://i.loli.net/2021/11/16/rFN4P3ZsmhDf9RK.png&#34;
 			
 			
 			
 			loading=&#34;lazy&#34;
-			&gt;
+			alt=&#34;image.png&#34;&gt;
 	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image.png&lt;/figcaption&gt;
 	
 &lt;/figure&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;2-one-dark-pro&#34;&gt;2. One Dark Pro&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;功能说明: vscode 使用人数比较多的主题&lt;/li&gt;
-&lt;li&gt;使用说明: 安装完成后即可使用
+&lt;li&gt;使用说明: 安装完成后即可使用&lt;br&gt;
 &lt;figure 
 	&gt;
-	&lt;a href=&#34;http://cdn.7bao.fun/images/20211116204049.png&#34; &gt;
-		&lt;img src=&#34;http://cdn.7bao.fun/images/20211116204049.png&#34;
+	&lt;a href=&#34;https://i.loli.net/2021/11/16/XyWs69Vm38uf4GI.png&#34; &gt;
+		&lt;img src=&#34;https://i.loli.net/2021/11/16/XyWs69Vm38uf4GI.png&#34;
 			
 			
 			
 			loading=&#34;lazy&#34;
-			&gt;
+			alt=&#34;image.png&#34;&gt;
 	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image.png&lt;/figcaption&gt;
 	
 &lt;/figure&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -53,14 +57,16 @@
 &lt;li&gt;使用说明: 安装完成后即可使用
 &lt;figure 
 	&gt;
-	&lt;a href=&#34;http://cdn.7bao.fun/images/20211116204427.png&#34; &gt;
-		&lt;img src=&#34;http://cdn.7bao.fun/images/20211116204427.png&#34;
+	&lt;a href=&#34;https://i.loli.net/2021/11/16/RutFhgf6eEiSH4L.png&#34; &gt;
+		&lt;img src=&#34;https://i.loli.net/2021/11/16/RutFhgf6eEiSH4L.png&#34;
 			
 			
 			
 			loading=&#34;lazy&#34;
-			&gt;
+			alt=&#34;image.png&#34;&gt;
 	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image.png&lt;/figcaption&gt;
 	
 &lt;/figure&gt;&lt;/li&gt;
 &lt;/ul&gt;
