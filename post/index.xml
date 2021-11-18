@@ -13,7 +13,7 @@
       <pubDate>Wed, 17 Nov 2021 15:17:01 +0800</pubDate>
       
       <guid>https://blog.7bao.fun/p/vscode-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
-      <description>常用  cmd + p 打开命名面板(万能) ctrl + tab 切换标签页 ctrl + shift + tab 反向切换标签页 ctrl + 丶 打开显示终端  代码相关  alt + F8 光标定位到当前页面问题代码 cmd + . 快速修复问题代码 ctrl + Enter 水平分屏方式打开文件 Go 语言静态检查配置  staticcheck是针对go的静态检查工具，文档地址 在 setting.json 中过滤掉对应的编号(例如过滤掉 ST1020 和 所有 S1 开头的规则) &amp;#34;go.lintFlags&amp;#34;: [ &amp;#34;-checks&amp;#34;, &amp;#34;all,-ST1020,-S1*&amp;#34; ]     vim 相关  ds&amp;quot; 删除 &amp;ldquo;abc&amp;rdquo; 的双引号 cs&amp;quot;&#39; 替换 &amp;ldquo;abc&amp;rdquo; 为 &amp;lsquo;abc&amp;rsquo; ysw&amp;quot; 添加&amp;quot;&amp;ldquo;给一个单词 S&amp;quot; 选中 abc 的情况下, 给 abc 加上双引号  </description>
+      <description>vscode 配置或快捷键  cmd + j 打开或关闭终端 F12 或 ctrl + ] 跳转到函数定义处 gh 显示鼠标 hover 在当前位置时提示的信息 ctrl + i 前进 ctrl + o 后退 alt + F8 光标定位到当前页面问题代码 cmd + . 快速修复问题代码 ctrl + Enter 水平分屏方式打开文件  vscode json 配置项  Go 语言静态检查配置  staticcheck是针对go的静态检查工具，文档地址 在 setting.json 中过滤掉对应的编号(例如过滤掉 ST1020 和 所有 S1 开头的规则) &amp;#34;go.lintFlags&amp;#34;: [ &amp;#34;-checks&amp;#34;, &amp;#34;all,-ST1020,-S1*&amp;#34; ]     vim 自身按键  {number} + w 向前移动 N 个单词 {number} + b 向后移动 N 个单词 % 跳转到匹配的括号 ctrl + ] + gd 跳转到函数定义处 gh 显示鼠标 hover 在当前位置时提示的信息 {number} + f + {char} 向右移动到第 N 个指定字符处 zt/zz/zb 光标跳转到屏幕的顶/中/底部 {number} + ctrl + E 向上滚屏 {number} + ctrl + Y 向上滚屏 ctrl + c 退出插入模式  vim 插件快捷键  ds&amp;quot; 删除 &amp;ldquo;abc&amp;rdquo; 的双引号 cs&amp;quot;&#39; 替换 &amp;ldquo;abc&amp;rdquo; 为 &amp;lsquo;abc&amp;rsquo; ysw&amp;quot; 添加&amp;quot;&amp;ldquo;给一个单词 S&amp;quot; 选中 abc 的情况下, 给 abc 加上双引号  </description>
     </item>
     
     <item>
