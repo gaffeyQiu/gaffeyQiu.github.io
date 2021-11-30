@@ -3,18 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.7bao.fun/categories/</loc>
-    <lastmod>2021-11-17T15:17:01+08:00</lastmod>
+    <lastmod>2021-11-30T16:20:01+08:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/</loc>
-    <lastmod>2021-11-17T15:17:01+08:00</lastmod>
+    <lastmod>2021-11-30T16:20:01+08:00</lastmod>
   </url><url>
-    <loc>https://blog.7bao.fun/categories/ide/</loc>
-    <lastmod>2021-11-17T15:17:01+08:00</lastmod>
+    <loc>https://blog.7bao.fun/tags/k8s/</loc>
+    <lastmod>2021-11-30T16:20:01+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/categories/kubernetes/</loc>
+    <lastmod>2021-11-30T16:20:01+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/p/kubernetes-%E7%BB%84%E4%BB%B6/</loc>
+    <lastmod>2021-11-30T16:20:01+08:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/post/</loc>
-    <lastmod>2021-11-17T15:17:01+08:00</lastmod>
+    <lastmod>2021-11-30T16:20:01+08:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/tags/</loc>
+    <lastmod>2021-11-30T16:20:01+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/categories/ide/</loc>
     <lastmod>2021-11-17T15:17:01+08:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/p/vscode-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</loc>
