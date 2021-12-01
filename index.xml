@@ -6,7 +6,135 @@
         <description>Recent content on gaffey的开发日志</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 01 Dec 2021 11:37:00 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 01 Dec 2021 19:17:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Gin 如何动态生成模型 swagger 文档</title>
+        <link>https://blog.7bao.fun/p/gin-%E5%A6%82%E4%BD%95%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B-swagger-%E6%96%87%E6%A1%A3/</link>
+        <pubDate>Wed, 01 Dec 2021 19:17:41 +0800</pubDate>
+        
+        <guid>https://blog.7bao.fun/p/gin-%E5%A6%82%E4%BD%95%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B-swagger-%E6%96%87%E6%A1%A3/</guid>
+        <description>&lt;img src="https://ypy.7bao.fun/img/20211201201550.png" alt="Featured image of post Gin 如何动态生成模型 swagger 文档" /&gt;&lt;p&gt;在做 API 接口开发时, 一般会统一 API 返回格式, 例如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;code&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;data&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;c1&#34;&gt;//xxxxx
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;//xxxxx
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;#34;message&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;OK&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;在后端代码定义中, 也会定义一个结构体来对应这种结构, 并且, 由于 &lt;code&gt;data&lt;/code&gt; 字段里的数据是未知的(与具体业务相关), 所以会定义一个 &lt;code&gt;interface&lt;/code&gt; 来接收&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ApiResponse&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Code&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;         &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;code&amp;#34;`&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Msg&lt;/span&gt;  &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;      &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;message&amp;#34;`&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Data&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;interface&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;data&amp;#34;`&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后根据具体业务响应, 向 data 传入不同的模型, 比如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;JSON&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ApiResponse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;OK&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;User&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是这里有个很大的问题, swagger 文档中, 这个接口的返回值该怎么定义?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// @Summary 获取用户信息
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// ...
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// ...
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @Success 200 {object} ApiResponse &amp;#34;ok&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetUser&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;gin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Context&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;nx&#34;&gt;xxxx&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果这样定义, 生成的文档会是下面这样, 因为原始 &lt;code&gt;ApiResponse&lt;/code&gt; 就是一个 &lt;code&gt;interface&lt;/code&gt;, 所以是空
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://ypy.7bao.fun/img/20211201200720.png&#34; &gt;
+		&lt;img src=&#34;https://ypy.7bao.fun/img/20211201200720.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;但是这样的文档写出来就没什么意义了, 大多数的做法就是会专门定义一个用于 swagger 显示的结构体, 类似这样&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;UserResponse&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Code&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;         &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;code&amp;#34;`&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Msg&lt;/span&gt;  &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;      &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;message&amp;#34;`&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Data&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;User&lt;/span&gt;        &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;data&amp;#34;`&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;虽然效果有了, 但是这样无疑增加了巨多的工作量, 让写代码变得索然无味, 翻看 &lt;a class=&#34;link&#34; href=&#34;https://github.com/swaggo/swag/blob/master/README_zh-CN.md#%E5%93%8D%E5%BA%94%E5%AF%B9%E8%B1%A1%E4%B8%AD%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%BB%84%E5%90%88&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;swaggo/swag 的文档&lt;/a&gt;, 发现支持了替换字段的方式, 可以完美解决现在这种问题, 效果如下
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://ypy.7bao.fun/img/20211201200433.png&#34; &gt;
+		&lt;img src=&#34;https://ypy.7bao.fun/img/20211201200433.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;下面是测试代码&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span class=&#34;kn&#34;&gt;package&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;main&lt;/span&gt;
+
+&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+	&lt;span class=&#34;s&#34;&gt;&amp;#34;net/http&amp;#34;&lt;/span&gt;
+	&lt;span class=&#34;s&#34;&gt;&amp;#34;strconv&amp;#34;&lt;/span&gt;
+
+	&lt;span class=&#34;s&#34;&gt;&amp;#34;github.com/gin-gonic/gin&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// @title Swagger Example API
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @version 1.0
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @description This is a sample server Petstore server.
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @termsOfService http://swagger.io/terms/
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// @contact.name API Support
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @contact.url http://www.swagger.io/support
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @contact.email support@swagger.io
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// @license.name Apache 2.0
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;// @host petstore.swagger.io
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @BasePath /v2
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;r&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;gin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;GET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/user/:id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;GetUser&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;// @Summary 获取用户信息
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @Description get User by ID
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @ID get-user-by-id
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @Accept  json
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @Produce  json
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @Param   id      path   int     true  &amp;#34;用户 id&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @Success 200 {object} ApiResponse{data=User} &amp;#34;ok&amp;#34;
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// @Router /user/{id} [get]
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kd&#34;&gt;func&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;GetUser&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;gin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Context&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;ApiResponse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+	&lt;span class=&#34;nx&#34;&gt;paramID&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Param&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;id&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;_&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;strconv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;Atoi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;paramID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;user&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;User&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+		&lt;span class=&#34;nx&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;   &lt;span class=&#34;nx&#34;&gt;uid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+		&lt;span class=&#34;nx&#34;&gt;Name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;张三&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+	&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Code&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Msg&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;OK&amp;#34;&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;Data&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;user&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;JSON&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;http&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;StatusOK&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;resp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;User&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;ID&lt;/span&gt;   &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;    &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;id&amp;#34;`&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Name&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;name&amp;#34;`&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ApiResponse&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Code&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;         &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;code&amp;#34;`&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Msg&lt;/span&gt;  &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;      &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;message&amp;#34;`&lt;/span&gt;
+	&lt;span class=&#34;nx&#34;&gt;Data&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;interface&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{}&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;`json:&amp;#34;data&amp;#34;`&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>GVK 和 GVR 的区别</title>
         <link>https://blog.7bao.fun/p/gvk-%E5%92%8C-gvr-%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
         <pubDate>Wed, 01 Dec 2021 11:37:00 +0800</pubDate>
@@ -44,35 +172,35 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是有了这个 apiVersion 和 kind , kubectl 如何转化成 http rest 请求发送到 apiServer 的呢? 这就需要用到 Resource 了&lt;/p&gt;
 &lt;h3 id=&#34;resources&#34;&gt;Resources&lt;/h3&gt;
 &lt;p&gt;有了 Resource , 搭配 group 和 version, 就能很轻易的知道对应的资源 rest url, 比如 deployment, 它的 apiVersion 是 apps/v1, 就可以查询集群中某个命名空间下的 deployment 列表.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;GET /apis/apps/v1/deployments
-// 也可以限定命名空间查询 /apis/apps/v1/namespaces/${namespace}/deployments 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;GET /apis/apps/v1/deployments
+// 也可以限定命名空间查询 /apis/apps/v1/namespaces/&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;namespace&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;/deployments 
 
-{
-  &amp;quot;kind&amp;quot;: &amp;quot;DeploymentList&amp;quot;,
-  &amp;quot;apiVersion&amp;quot;: &amp;quot;apps/v1&amp;quot;,
-  &amp;quot;metadata&amp;quot;: {
-    &amp;quot;selfLink&amp;quot;: &amp;quot;/apis/apps/v1/namespaces/tke/deployments&amp;quot;,
-    &amp;quot;resourceVersion&amp;quot;: &amp;quot;4819273&amp;quot;
-  },
-  &amp;quot;items&amp;quot;: [
-    {
-      &amp;quot;metadata&amp;quot;: {
-        &amp;quot;name&amp;quot;: &amp;quot;tke-auth-api&amp;quot;,
-        &amp;quot;namespace&amp;quot;: &amp;quot;tke&amp;quot;,
-        &amp;quot;selfLink&amp;quot;: &amp;quot;/apis/apps/v1/namespaces/tke/deployments/tke-auth-api&amp;quot;,
-        &amp;quot;uid&amp;quot;: &amp;quot;28979433-72d2-40d0-8555-038bdd8b95ca&amp;quot;,
-        &amp;quot;resourceVersion&amp;quot;: &amp;quot;1344&amp;quot;,
-        &amp;quot;generation&amp;quot;: 1,
-        &amp;quot;creationTimestamp&amp;quot;: &amp;quot;2021-11-22T08:13:44Z&amp;quot;,
-        &amp;quot;labels&amp;quot;: {
-          &amp;quot;app&amp;quot;: &amp;quot;tke-auth-api&amp;quot;
-        },
-        &amp;quot;annotations&amp;quot;: {
-          &amp;quot;deployment.kubernetes.io/revision&amp;quot;: &amp;quot;1&amp;quot;
-        },
+&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+  &lt;span class=&#34;s2&#34;&gt;&amp;#34;kind&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;DeploymentList&amp;#34;&lt;/span&gt;,
+  &lt;span class=&#34;s2&#34;&gt;&amp;#34;apiVersion&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;apps/v1&amp;#34;&lt;/span&gt;,
+  &lt;span class=&#34;s2&#34;&gt;&amp;#34;metadata&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;selfLink&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;/apis/apps/v1/namespaces/tke/deployments&amp;#34;&lt;/span&gt;,
+    &lt;span class=&#34;s2&#34;&gt;&amp;#34;resourceVersion&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;4819273&amp;#34;&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;,
+  &lt;span class=&#34;s2&#34;&gt;&amp;#34;items&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+      &lt;span class=&#34;s2&#34;&gt;&amp;#34;metadata&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;name&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;tke-auth-api&amp;#34;&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;namespace&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;tke&amp;#34;&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;selfLink&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;/apis/apps/v1/namespaces/tke/deployments/tke-auth-api&amp;#34;&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;uid&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;28979433-72d2-40d0-8555-038bdd8b95ca&amp;#34;&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;resourceVersion&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;1344&amp;#34;&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;generation&amp;#34;&lt;/span&gt;: 1,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;creationTimestamp&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;2021-11-22T08:13:44Z&amp;#34;&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;labels&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+          &lt;span class=&#34;s2&#34;&gt;&amp;#34;app&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;tke-auth-api&amp;#34;&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;,
+        &lt;span class=&#34;s2&#34;&gt;&amp;#34;annotations&amp;#34;&lt;/span&gt;: &lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;
+          &lt;span class=&#34;s2&#34;&gt;&amp;#34;deployment.kubernetes.io/revision&amp;#34;&lt;/span&gt;: &lt;span class=&#34;s2&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;,
         ...
         ...
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以发现, resouce 和 kind 区别并不大, 拿上面的例子来说, kind 是 deployment, resource 也是 deployment, 但是光知道 GVK, 只能知道是一个什么类型的 API, 但是知道 GVR, 就能知道具体的资源, 有点类似于面向对象的 类 和 对象 的区别, Kind 类似 User 类, 那么 new User(张三) 就是对应的 Resource 了&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;可以发现, resouce 和 kind 区别并不大, 拿上面的例子来说, kind 是 deployment, resource 也是 deployment, 但是光知道 GVK, 只能知道是一个什么类型的 API, 但是知道 GVR, 就能知道具体的资源, 有点类似于面向对象的 类 和 对象 的区别, Kind 类似 User 类, 那么 new User(张三) 就是对应的 Resource 了&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;通常情况下 Kind 和 Resource 是一一对应的, Scale Kind 可能对应很多 Resources：deployments/scale 或者 replicasets/scale, 而且 Resource 始终是小写形式，并且通常情况下是 Kind 的小写&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -258,15 +386,6 @@
 &lt;blockquote&gt;
 &lt;p&gt;&amp;hellip;不定期补充&lt;/p&gt;
 &lt;/blockquote&gt;
-</description>
-        </item>
-        <item>
-        <title>[Go] Map</title>
-        <link>https://blog.7bao.fun/p/go-map/</link>
-        <pubDate>Thu, 11 Nov 2021 16:17:41 +0800</pubDate>
-        
-        <guid>https://blog.7bao.fun/p/go-map/</guid>
-        <description>&lt;p&gt;Map 怎么扩容&lt;/p&gt;
 </description>
         </item>
         <item>
