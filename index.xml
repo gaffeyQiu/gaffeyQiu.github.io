@@ -6,14 +6,101 @@
         <description>Recent content on gaffey的开发日志</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Tue, 30 Nov 2021 16:20:01 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Kubernetes 组件</title>
-        <link>https://blog.7bao.fun/p/kubernetes-%E7%BB%84%E4%BB%B6/</link>
-        <pubDate>Tue, 30 Nov 2021 16:20:01 +0800</pubDate>
+        <lastBuildDate>Wed, 01 Dec 2021 11:37:00 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>GVK 和 GVR 的区别</title>
+        <link>https://blog.7bao.fun/p/gvk-%E5%92%8C-gvr-%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+        <pubDate>Wed, 01 Dec 2021 11:37:00 +0800</pubDate>
         
-        <guid>https://blog.7bao.fun/p/kubernetes-%E7%BB%84%E4%BB%B6/</guid>
-        <description>&lt;h2 id=&#34;kubernetes-架构图&#34;&gt;Kubernetes 架构图&lt;/h2&gt;
-</description>
+        <guid>https://blog.7bao.fun/p/gvk-%E5%92%8C-gvr-%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+        <description>&lt;img src="https://ypy.7bao.fun/img/20211201134543.png" alt="Featured image of post GVK 和 GVR 的区别" /&gt;&lt;p&gt;在查看或者编写 k8s API 的时候, 经常会看到四个术语 &lt;code&gt;groups&lt;/code&gt; &lt;code&gt;versions&lt;/code&gt; &lt;code&gt;kinds&lt;/code&gt; &lt;code&gt;resources&lt;/code&gt; 其中大多数以组合的形式出现, 分别为 &lt;code&gt;GVK&lt;/code&gt; &lt;code&gt;GVR&lt;/code&gt;, 这两个术语很容易弄混, 接下来讲讲他们的区别.&lt;/p&gt;
+&lt;h3 id=&#34;group-和-version&#34;&gt;Group 和 Version&lt;/h3&gt;
+&lt;p&gt;Group 和 Version 很好理解, 在 k8s 用 yaml 清单部署过服务的都应该看到过这个字段&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;apiVersion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;apps/v1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;kind&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;xxx&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;metadata&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;上面例子中, apps 就是 group, version 是 v1, 每个 group 可以包含多个 version, 这样的关系可以随着时间的推移, 创建多个不同 version 来兼容更多的 api 改动&lt;br&gt;
+&lt;strong&gt;特殊的, 有的资源没有 group, 只有 version, 例如 pod, 这类被称为核心资源组&lt;/strong&gt;
+&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://ypy.7bao.fun/img/20211201114820.png&#34; &gt;
+		&lt;img src=&#34;https://ypy.7bao.fun/img/20211201114820.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			&gt;
+	&lt;/a&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;其中 Alpha 是内测版本, 一般不建议使用, 如 v1alpha1, Beta 是经过测试的相对稳定版, 如 v1beta1, Stable 是正式发布版 如 v1, v2&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;kind&#34;&gt;Kind&lt;/h3&gt;
+&lt;p&gt;这个字段第一次接触应该是在 yaml 清单, 常见的有 pod, deployment, service 等, 它结合 apiVersion 能确定一个具体的 API 类型, 比如下面的 yaml 清单能定位到一种 API 类型&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;apiVersion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;apps/v1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;kind&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;DaemonSet&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;metadata&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;l&#34;&gt;node-exporter&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;但是有了这个 apiVersion 和 kind , kubectl 如何转化成 http rest 请求发送到 apiServer 的呢? 这就需要用到 Resource 了&lt;/p&gt;
+&lt;h3 id=&#34;resources&#34;&gt;Resources&lt;/h3&gt;
+&lt;p&gt;有了 Resource , 搭配 group 和 version, 就能很轻易的知道对应的资源 rest url, 比如 deployment, 它的 apiVersion 是 apps/v1, 就可以查询集群中某个命名空间下的 deployment 列表.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;GET /apis/apps/v1/deployments
+// 也可以限定命名空间查询 /apis/apps/v1/namespaces/${namespace}/deployments 
+
+{
+  &amp;quot;kind&amp;quot;: &amp;quot;DeploymentList&amp;quot;,
+  &amp;quot;apiVersion&amp;quot;: &amp;quot;apps/v1&amp;quot;,
+  &amp;quot;metadata&amp;quot;: {
+    &amp;quot;selfLink&amp;quot;: &amp;quot;/apis/apps/v1/namespaces/tke/deployments&amp;quot;,
+    &amp;quot;resourceVersion&amp;quot;: &amp;quot;4819273&amp;quot;
+  },
+  &amp;quot;items&amp;quot;: [
+    {
+      &amp;quot;metadata&amp;quot;: {
+        &amp;quot;name&amp;quot;: &amp;quot;tke-auth-api&amp;quot;,
+        &amp;quot;namespace&amp;quot;: &amp;quot;tke&amp;quot;,
+        &amp;quot;selfLink&amp;quot;: &amp;quot;/apis/apps/v1/namespaces/tke/deployments/tke-auth-api&amp;quot;,
+        &amp;quot;uid&amp;quot;: &amp;quot;28979433-72d2-40d0-8555-038bdd8b95ca&amp;quot;,
+        &amp;quot;resourceVersion&amp;quot;: &amp;quot;1344&amp;quot;,
+        &amp;quot;generation&amp;quot;: 1,
+        &amp;quot;creationTimestamp&amp;quot;: &amp;quot;2021-11-22T08:13:44Z&amp;quot;,
+        &amp;quot;labels&amp;quot;: {
+          &amp;quot;app&amp;quot;: &amp;quot;tke-auth-api&amp;quot;
+        },
+        &amp;quot;annotations&amp;quot;: {
+          &amp;quot;deployment.kubernetes.io/revision&amp;quot;: &amp;quot;1&amp;quot;
+        },
+        ...
+        ...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;可以发现, resouce 和 kind 区别并不大, 拿上面的例子来说, kind 是 deployment, resource 也是 deployment, 但是光知道 GVK, 只能知道是一个什么类型的 API, 但是知道 GVR, 就能知道具体的资源, 有点类似于面向对象的 类 和 对象 的区别, Kind 类似 User 类, 那么 new User(张三) 就是对应的 Resource 了&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;通常情况下 Kind 和 Resource 是一一对应的, Scale Kind 可能对应很多 Resources：deployments/scale 或者 replicasets/scale, 而且 Resource 始终是小写形式，并且通常情况下是 Kind 的小写&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;gvk-gvr-互转&#34;&gt;GVK GVR 互转&lt;/h3&gt;
+&lt;p&gt;编码过程中, 如果遇到这两种类型, 可以通过 &lt;code&gt;RESTMapper&lt;/code&gt; 进行互相转换&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span class=&#34;kd&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;RESTMapper&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;interface&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;c1&#34;&gt;// KindFor takes a partial resource and returns the single match.  Returns an error if there are multiple matches
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;nf&#34;&gt;KindFor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resource&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupVersionResource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupVersionKind&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+	&lt;span class=&#34;c1&#34;&gt;// KindsFor takes a partial resource and returns the list of potential kinds in priority order
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;nf&#34;&gt;KindsFor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resource&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupVersionResource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;([]&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupVersionKind&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+	&lt;span class=&#34;c1&#34;&gt;// ResourceFor takes a partial resource and returns the single match.  Returns an error if there are multiple matches
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;nf&#34;&gt;ResourceFor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupVersionResource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupVersionResource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+	&lt;span class=&#34;c1&#34;&gt;// ResourcesFor takes a partial resource and returns the list of potential resource in priority order
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;nf&#34;&gt;ResourcesFor&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;input&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupVersionResource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;([]&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupVersionResource&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+	&lt;span class=&#34;c1&#34;&gt;// RESTMapping identifies a preferred resource mapping for the provided group kind.
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;nf&#34;&gt;RESTMapping&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;gk&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupKind&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;versions&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;RESTMapping&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+	&lt;span class=&#34;c1&#34;&gt;// RESTMappings returns all resource mappings for the provided group kind if no
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;// version search is provided. Otherwise identifies a preferred resource mapping for
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;c1&#34;&gt;// the provided version(s).
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;	&lt;span class=&#34;nf&#34;&gt;RESTMappings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;gk&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;GroupKind&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;versions&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;([]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;RESTMapping&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+
+	&lt;span class=&#34;nf&#34;&gt;ResourceSingularizer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resource&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;singular&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;err&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
         </item>
         <item>
         <title>VsCode 使用技巧</title>
