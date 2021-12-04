@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Goland on gaffey的开发日志</title>
+    <link>https://blog.7bao.fun/tags/goland/</link>
+    <description>Recent content in Goland on gaffey的开发日志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 Dec 2021 13:17:01 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/tags/goland/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Goland 使用技巧</title>
+      <link>https://blog.7bao.fun/p/goland-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Fri, 03 Dec 2021 13:17:01 +0800</pubDate>
+      
+      <guid>https://blog.7bao.fun/p/goland-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
+      <description>显示函数的参数 (cmd + p)   实现接口 (ctrl + i) (cmd + n)  
+生成测试 (cmd + shift + t) (cmd + n)   在打开的文件之间导航 (ctrl + tab)     最近的文件 (cmd + e)   查看结构体窗口 (cmd + F12)   调用层次接口 (ctrl + alt + h)   显示引用 (alt + F7)   历史剪贴板 (cmd + shift + v)   打开/关闭终端 (alt + F12) 跳转到定义或引用 (cmd + b) 前进/后退 (cmd + [) (cmd + ]) 自动填充结构体 (alt + enter)   快速显示定义 (cmd + y)</description>
+    </item>
+    
+  </channel>
+</rss>

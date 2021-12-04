@@ -3,10 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.7bao.fun/categories/</loc>
-    <lastmod>2021-12-01T19:17:41+08:00</lastmod>
+    <lastmod>2021-12-03T13:17:01+08:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/</loc>
-    <lastmod>2021-12-01T19:17:41+08:00</lastmod>
+    <lastmod>2021-12-03T13:17:01+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/tags/goland/</loc>
+    <lastmod>2021-12-03T13:17:01+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/p/goland-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2021-12-03T13:17:01+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/categories/ide/</loc>
+    <lastmod>2021-12-03T13:17:01+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/post/</loc>
+    <lastmod>2021-12-03T13:17:01+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/tags/</loc>
+    <lastmod>2021-12-03T13:17:01+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2021-12-03T13:17:01+08:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/tags/gin/</loc>
     <lastmod>2021-12-01T19:17:41+08:00</lastmod>
@@ -20,12 +38,6 @@
     <loc>https://blog.7bao.fun/categories/golang/</loc>
     <lastmod>2021-12-01T19:17:41+08:00</lastmod>
   </url><url>
-    <loc>https://blog.7bao.fun/post/</loc>
-    <lastmod>2021-12-01T19:17:41+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.7bao.fun/tags/</loc>
-    <lastmod>2021-12-01T19:17:41+08:00</lastmod>
-  </url><url>
     <loc>https://blog.7bao.fun/p/gvk-%E5%92%8C-gvr-%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
     <lastmod>2021-12-01T11:37:00+08:00</lastmod>
   </url><url>
@@ -35,13 +47,7 @@
     <loc>https://blog.7bao.fun/categories/kubernetes/</loc>
     <lastmod>2021-12-01T11:37:00+08:00</lastmod>
   </url><url>
-    <loc>https://blog.7bao.fun/categories/ide/</loc>
-    <lastmod>2021-11-17T15:17:01+08:00</lastmod>
-  </url><url>
     <loc>https://blog.7bao.fun/p/vscode-%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-11-17T15:17:01+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.7bao.fun/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2021-11-17T15:17:01+08:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/p/vscode-%E6%8F%92%E4%BB%B6%E5%88%86%E4%BA%AB/</loc>
