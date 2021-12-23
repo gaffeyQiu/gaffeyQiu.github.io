@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>翻译 on gaffey的开发日志</title>
+    <link>https://blog.7bao.fun/tags/%E7%BF%BB%E8%AF%91/</link>
+    <description>Recent content in 翻译 on gaffey的开发日志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Dec 2021 16:08:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/tags/%E7%BF%BB%E8%AF%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[翻译]How Does a Database Work?</title>
+      <link>https://blog.7bao.fun/p/%E7%BF%BB%E8%AF%91how-does-a-database-work/</link>
+      <pubDate>Fri, 17 Dec 2021 16:08:41 +0800</pubDate>
+      
+      <guid>https://blog.7bao.fun/p/%E7%BF%BB%E8%AF%91how-does-a-database-work/</guid>
+      <description>数据库是如何工作的?  数据在磁盘或内存中以什么格式保存？ 它什么时候从内存移动到磁盘？//todo 为什么一张表只能有一个主键？ 事务如何回滚？ 索引是如何格式化的？//todo 何时以及如何进行全表扫描？ 准备好的语句保存格式是什么？  简而言之，数据库是如何工作的？
+我正在用 C 从头开始构建一个 sqlite 的副本，以便理解，我将在进行的过程中记录我的过程
+目录  Part1 -  reference  https://cstack.github.io/db_tutorial
+ </description>
+    </item>
+    
+  </channel>
+</rss>

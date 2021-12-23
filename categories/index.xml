@@ -6,7 +6,16 @@
     <description>Recent content in Categories on gaffey的开发日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 03 Dec 2021 13:17:01 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Dec 2021 16:08:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Database</title>
+      <link>https://blog.7bao.fun/categories/database/</link>
+      <pubDate>Fri, 17 Dec 2021 16:08:41 +0800</pubDate>
+      
+      <guid>https://blog.7bao.fun/categories/database/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>IDE</title>
       <link>https://blog.7bao.fun/categories/ide/</link>
