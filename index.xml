@@ -12,7 +12,7 @@
         <pubDate>Wed, 22 Dec 2021 22:38:41 +0800</pubDate>
         
         <guid>https://blog.7bao.fun/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C-ucore-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/</guid>
-        <description>&lt;img src="https://ypy.7bao.fun/img/jonathan-arbely-477E0cXoc1c-unsplash.jpeg" alt="Featured image of post [操作系统实验] ucore 环境准备" /&gt;&lt;h1 id=&#34;环境准备&#34;&gt;环境准备&lt;/h1&gt;
+        <description>&lt;img src="https://ypy.7bao.fun/img/xps-EzYq1HOl5_8-unsplash.jpg" alt="Featured image of post [操作系统实验] ucore 环境准备" /&gt;&lt;h1 id=&#34;环境准备&#34;&gt;环境准备&lt;/h1&gt;
 &lt;h3 id=&#34;1-准备一台装有-ubuntu-操作系统的机器&#34;&gt;1. 准备一台装有 ubuntu 操作系统的机器&lt;/h3&gt;
 &lt;p&gt;建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端
 &lt;figure 
@@ -125,7 +125,9 @@ make qemu
 &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
-asks.json` 文件
+
+asks.json` 文件  
+
 `json
  	&amp;quot;tasks&amp;quot;: [
  		{
@@ -149,10 +151,11 @@ asks.json` 文件
  		}
  	],
  	&amp;quot;version&amp;quot;: &amp;quot;2.0.0&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;�击 `vscode` 的 `debug` 按钮， 会出现如图所示的效果
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
+  点击 `vscode` 的 `debug` 按钮， 会出现如图所示的效果
 
-](https://ypy.7bao.fun/img/20211222222255.png)
-�果上比 `cgdb` 强了不少，可惜不能调试 `bootmain.c`&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+  ![](https://ypy.7bao.fun/img/20211222222255.png)
+  效果上比 `cgdb` 强了不少，可惜不能调试 `bootmain.c`&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
