@@ -12,10 +12,11 @@
         <pubDate>Wed, 22 Dec 2021 22:38:41 +0800</pubDate>
         
         <guid>https://blog.7bao.fun/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C-ucore-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/</guid>
-        <description>&lt;img src="https://ypy.7bao.fun/img/xps-EzYq1HOl5_8-unsplash.jpg" alt="Featured image of post [操作系统实验] ucore 环境准备" /&gt;&lt;h1 id=&#34;环境准备&#34;&gt;环境准备&lt;/h1&gt;
+        <description>&lt;img src="https://ypy.7bao.fun/img/xps-EzYq1HOl5_8-unsplash.jpg" alt="Featured image of post [操作系统实验] ucore 环境准备" /&gt;&lt;h1 id=&#34;实验-ucore-环境准备&#34;&gt;[实验] ucore 环境准备&lt;/h1&gt;
+&lt;h1 id=&#34;环境准备&#34;&gt;环境准备&lt;/h1&gt;
 &lt;h3 id=&#34;1-准备一台装有-ubuntu-操作系统的机器&#34;&gt;1. 准备一台装有 ubuntu 操作系统的机器&lt;/h3&gt;
-&lt;p&gt;建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端
-&lt;figure 
+&lt;p&gt;建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端&lt;/p&gt;
+&lt;p&gt;&lt;figure 
 	&gt;
 	&lt;a href=&#34;https://ypy.7bao.fun/img/20211222204823.png&#34; &gt;
 		&lt;img src=&#34;https://ypy.7bao.fun/img/20211222204823.png&#34;
@@ -23,11 +24,13 @@
 			
 			
 			loading=&#34;lazy&#34;
-			&gt;
+			alt=&#34;https://ypy.7bao.fun/img/20211222204823.png&#34;&gt;
 	&lt;/a&gt;
 	
-&lt;/figure&gt;
-ps：小豹子挺可爱的&lt;/p&gt;
+	&lt;figcaption&gt;&lt;a href=&#34;https://ypy.7bao.fun/img/20211222204823.png&#34;&gt;https://ypy.7bao.fun/img/20211222204823.png&lt;/a&gt;&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;ps：小豹子挺可爱的&lt;/p&gt;
 &lt;h3 id=&#34;2-安装环境&#34;&gt;2. 安装环境&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;gcc&lt;/code&gt;: 编译 c++&lt;/li&gt;
@@ -41,17 +44,19 @@ ps：小豹子挺可爱的&lt;/p&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;3-实验资料&#34;&gt;3. 实验资料&lt;/h3&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/chyyuu/os_course_info&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;实验资料&lt;/a&gt;
-&lt;a class=&#34;link&#34; href=&#34;https://chyyuu.gitbooks.io/ucore_os_docs/content/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;实验指导书&lt;/a&gt; .&lt;/p&gt;
+    &gt;https://github.com/chyyuu/os_course_info&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://chyyuu.gitbooks.io/ucore_os_docs/content/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Introduction&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://nankai.gitbook.io/ucore-os-on-risc-v64/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Introduction&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;4-获取代码&#34;&gt;4. 获取代码&lt;/h3&gt;
 &lt;p&gt;根据实验资料查到项目地址，非常友好的开源了，没有放在清华的内网。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git clone https://github.com/chyyuu/os_kernel_lab.git
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git clone &amp;lt;https://github.com/chyyuu/os_kernel_lab.git
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这样获取到的代码默认是 &lt;code&gt;rust&lt;/code&gt; 语言实现的，目前我学习的是 &lt;code&gt;c&lt;/code&gt; 语言实现，所以切换到 &lt;code&gt;master&lt;/code&gt; 分支 （后续实验完成了希望能用 &lt;code&gt;rust&lt;/code&gt; 也实现一遍)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;git checkout master
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git checkout master
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;5验证环境&#34;&gt;5.验证环境&lt;/h3&gt;
 &lt;p&gt;可以参考视频 学堂在线 2.7 演示实验操作过程&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 进入代码 lab1 的答案目录&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 进入代码 lab1 的答案目录&lt;/span&gt;
 &lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; os_kernel_lab/labcodes_answer/lab1_result
 
 &lt;span class=&#34;c1&#34;&gt;# 清理上次构建的产物（首次可以不用清理）&lt;/span&gt;
@@ -67,17 +72,19 @@ make qemu
 			
 			
 			loading=&#34;lazy&#34;
-			&gt;
+			alt=&#34;https://ypy.7bao.fun/img/20211222210237.png&#34;&gt;
 	&lt;/a&gt;
 	
-&lt;/figure&gt;
-能成功看到不停的有 ticks 输出即可&lt;/p&gt;
+	&lt;figcaption&gt;&lt;a href=&#34;https://ypy.7bao.fun/img/20211222210237.png&#34;&gt;https://ypy.7bao.fun/img/20211222210237.png&lt;/a&gt;&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;能成功看到不停的有 &lt;code&gt;ticks&lt;/code&gt; 输出即可&lt;/p&gt;
 &lt;h3 id=&#34;6-如何-debug&#34;&gt;6. 如何 Debug&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;使用 &lt;code&gt;cgdb&lt;/code&gt; 调试&lt;br&gt;
-在每个 lab 的目录下执行 make debug, 即可弹出 debug 界面
-&lt;figure 
+&lt;p&gt;使用 &lt;code&gt;cgdb&lt;/code&gt; 调试
+在每个 lab 的目录下执行 make debug, 即可弹出 debug 界面&lt;/p&gt;
+&lt;p&gt;&lt;figure 
 	&gt;
 	&lt;a href=&#34;https://ypy.7bao.fun/img/20211222222409.png&#34; &gt;
 		&lt;img src=&#34;https://ypy.7bao.fun/img/20211222222409.png&#34;
@@ -85,19 +92,22 @@ make qemu
 			
 			
 			loading=&#34;lazy&#34;
-			&gt;
+			alt=&#34;https://ypy.7bao.fun/img/20211222222409.png&#34;&gt;
 	&lt;/a&gt;
+	
+	&lt;figcaption&gt;&lt;a href=&#34;https://ypy.7bao.fun/img/20211222222409.png&#34;&gt;https://ypy.7bao.fun/img/20211222222409.png&lt;/a&gt;&lt;/figcaption&gt;
 	
 &lt;/figure&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;使用 &lt;code&gt;vscode&lt;/code&gt; 调试&lt;/p&gt;
-&lt;p&gt;需要预先填好 &lt;code&gt;vscode debug&lt;/code&gt; 配置文件&lt;br&gt;
-&lt;code&gt;launch.json&lt;/code&gt; 文件&lt;/p&gt;
+&lt;p&gt;使用 &lt;code&gt;vscode&lt;/code&gt; 调试
+效果上比 &lt;code&gt;cgdb&lt;/code&gt; 强了不少，可惜不能调试 &lt;code&gt;bootmain.c&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;需要预先填好下面的 &lt;code&gt;vscode debug&lt;/code&gt; 配置文件&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;launch.json&lt;/code&gt; 文件&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;span class=&#34;c1&#34;&gt;// 使用 IntelliSense 了解相关属性。 
+&lt;span class=&#34;c1&#34;&gt;// 使用 IntelliSense 了解相关属性。
 &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 悬停以查看现有属性的描述。
-&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 欲了解更多信息，请访问: &amp;lt;https://go.microsoft.com/fwlink/?linkid=830387&amp;gt;
 &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;&amp;#34;version&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0.2.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
 &lt;span class=&#34;nt&#34;&gt;&amp;#34;configurations&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
     &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
@@ -124,38 +134,49 @@ make qemu
     &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
 
-asks.json` 文件  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;tasks.json&lt;/code&gt; 文件&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+	&lt;span class=&#34;nt&#34;&gt;&amp;#34;tasks&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+		&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+  			&lt;span class=&#34;nt&#34;&gt;&amp;#34;label&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;make-gdb&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  			&lt;span class=&#34;nt&#34;&gt;&amp;#34;command&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;make&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  			&lt;span class=&#34;nt&#34;&gt;&amp;#34;args&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;
+    			&lt;span class=&#34;s2&#34;&gt;&amp;#34;gdb&amp;#34;&lt;/span&gt;
+  			&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+  			&lt;span class=&#34;nt&#34;&gt;&amp;#34;type&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;shell&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  			&lt;span class=&#34;nt&#34;&gt;&amp;#34;isBackground&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+  			&lt;span class=&#34;nt&#34;&gt;&amp;#34;problemMatcher&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+    			&lt;span class=&#34;nt&#34;&gt;&amp;#34;pattern&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+      				&lt;span class=&#34;nt&#34;&gt;&amp;#34;regexp&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;
+    			&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+    			&lt;span class=&#34;nt&#34;&gt;&amp;#34;background&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+   		 			&lt;span class=&#34;nt&#34;&gt;&amp;#34;activeOnStart&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    				&lt;span class=&#34;nt&#34;&gt;&amp;#34;beginsPattern&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+    				&lt;span class=&#34;nt&#34;&gt;&amp;#34;endsPattern&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;
+    			&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+			&lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+		&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+	&lt;span class=&#34;p&#34;&gt;],&lt;/span&gt;
+	&lt;span class=&#34;nt&#34;&gt;&amp;#34;version&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2.0.0&amp;#34;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 
-`json
- 	&amp;quot;tasks&amp;quot;: [
- 		{
-   			&amp;quot;label&amp;quot;: &amp;quot;make-gdb&amp;quot;,
-   			&amp;quot;command&amp;quot;: &amp;quot;make&amp;quot;,
-   			&amp;quot;args&amp;quot;: [
-     			&amp;quot;gdb&amp;quot;
-   			],
-   			&amp;quot;type&amp;quot;: &amp;quot;shell&amp;quot;,
-   			&amp;quot;isBackground&amp;quot;: true,
-   			&amp;quot;problemMatcher&amp;quot;: {
-     			&amp;quot;pattern&amp;quot;: {
-       				&amp;quot;regexp&amp;quot;: &amp;quot;.&amp;quot;
-     			},
-     			&amp;quot;background&amp;quot;: {
-    		 			&amp;quot;activeOnStart&amp;quot;: true,
-     				&amp;quot;beginsPattern&amp;quot;: &amp;quot;.&amp;quot;,
-     				&amp;quot;endsPattern&amp;quot;: &amp;quot;.&amp;quot;
-     			},
- 			},
- 		}
- 	],
- 	&amp;quot;version&amp;quot;: &amp;quot;2.0.0&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;
-  点击 `vscode` 的 `debug` 按钮， 会出现如图所示的效果
-
-  ![](https://ypy.7bao.fun/img/20211222222255.png)
-  效果上比 `cgdb` 强了不少，可惜不能调试 `bootmain.c`&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;点击 &lt;code&gt;vscode&lt;/code&gt; 的 &lt;code&gt;debug&lt;/code&gt; 按钮， 会出现如图所示的效果&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	&gt;
+	&lt;a href=&#34;https://ypy.7bao.fun/img/20211222222255.png&#34; &gt;
+		&lt;img src=&#34;https://ypy.7bao.fun/img/20211222222255.png&#34;
+			
+			
+			
+			loading=&#34;lazy&#34;
+			alt=&#34;https://ypy.7bao.fun/img/20211222222255.png&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;&lt;a href=&#34;https://ypy.7bao.fun/img/20211222222255.png&#34;&gt;https://ypy.7bao.fun/img/20211222222255.png&lt;/a&gt;&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>

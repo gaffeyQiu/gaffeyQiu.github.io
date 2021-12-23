@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='环境准备 1. 准备一台装有 ubuntu 操作系统的机器 建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端   ps：小豹子挺可爱的
-2. 安装环境  gcc: 编译 c&#43;&#43; make: 自动编译或测试代码 gdb: 调试代码 cgdb: 字符方式调试代码 qemu: 调试内核，实验中搭配 cgdb 使用 git: 获取实验所需代码 vscode: 编写代码 vim: 偶尔也会在终端用 vim 查看代码  3. 实验资料 实验资料 实验指导书 .
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='[实验] ucore 环境准备 环境准备 1. 准备一台装有 ubuntu 操作系统的机器 建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端
+ https://ypy.7bao.fun/img/20211222204823.png 
+ps：小豹子挺可爱的
+2. 安装环境  gcc: 编译 c&#43;&#43; make: 自动编译或测试代码 gdb: 调试代码 cgdb: 字符方式调试代码 qemu: 调试内核，实验中搭配 cgdb 使用 git: 获取实验所需代码 vscode: 编写代码 vim: 偶尔也会在终端用 vim 查看代码  3. 实验资料 https://github.com/chyyuu/os_course_info
+Introduction
+Introduction
 4. 获取代码 根据实验资料查到项目地址，非常友好的开源了，没有放在清华的内网。
-git clone https://github.com/chyyuu/os_kernel_lab.git 这样获取到的代码默认是 rust 语言实现的，目前我学习的是 c 语言实现，所以切换到 master 分支 （后续实验完成了希望能用 rust 也实现一遍)
-git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实验操作过程
-# 进入代码 lab1 的答案目录 cd os_kernel_lab/labcodes_answer/lab1_result # 清理上次构建的产物（首次可以不用清理） make clean # 启动 qemu make qemu   能成功看到不停的有 ticks 输出即可'><title>[操作系统实验] ucore 环境准备</title>
+git clone &amp;lt;https://github.com/chyyuu/os_kernel_lab.git 这样获取到的代码默认是 rust 语言实现的，目前我学习的是 c 语言实现，所以切换到 master 分支 （后续实验完成了希望能用 rust 也实现一遍)
+git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实验操作过程'><title>[操作系统实验] ucore 环境准备</title>
 
 <link rel='canonical' href='https://blog.7bao.fun/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C-ucore-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/'>
 
 <link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='[操作系统实验] ucore 环境准备'>
-<meta property='og:description' content='环境准备 1. 准备一台装有 ubuntu 操作系统的机器 建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端   ps：小豹子挺可爱的
-2. 安装环境  gcc: 编译 c&#43;&#43; make: 自动编译或测试代码 gdb: 调试代码 cgdb: 字符方式调试代码 qemu: 调试内核，实验中搭配 cgdb 使用 git: 获取实验所需代码 vscode: 编写代码 vim: 偶尔也会在终端用 vim 查看代码  3. 实验资料 实验资料 实验指导书 .
+<meta property='og:description' content='[实验] ucore 环境准备 环境准备 1. 准备一台装有 ubuntu 操作系统的机器 建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端
+ https://ypy.7bao.fun/img/20211222204823.png 
+ps：小豹子挺可爱的
+2. 安装环境  gcc: 编译 c&#43;&#43; make: 自动编译或测试代码 gdb: 调试代码 cgdb: 字符方式调试代码 qemu: 调试内核，实验中搭配 cgdb 使用 git: 获取实验所需代码 vscode: 编写代码 vim: 偶尔也会在终端用 vim 查看代码  3. 实验资料 https://github.com/chyyuu/os_course_info
+Introduction
+Introduction
 4. 获取代码 根据实验资料查到项目地址，非常友好的开源了，没有放在清华的内网。
-git clone https://github.com/chyyuu/os_kernel_lab.git 这样获取到的代码默认是 rust 语言实现的，目前我学习的是 c 语言实现，所以切换到 master 分支 （后续实验完成了希望能用 rust 也实现一遍)
-git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实验操作过程
-# 进入代码 lab1 的答案目录 cd os_kernel_lab/labcodes_answer/lab1_result # 清理上次构建的产物（首次可以不用清理） make clean # 启动 qemu make qemu   能成功看到不停的有 ticks 输出即可'>
+git clone &amp;lt;https://github.com/chyyuu/os_kernel_lab.git 这样获取到的代码默认是 rust 语言实现的，目前我学习的是 c 语言实现，所以切换到 master 分支 （后续实验完成了希望能用 rust 也实现一遍)
+git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实验操作过程'>
 <meta property='og:url' content='https://blog.7bao.fun/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C-ucore-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/'>
 <meta property='og:site_name' content='gaffey的开发日志'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C' /><meta property='article:tag' content='操作系统' /><meta property='article:published_time' content='2021-12-22T22:38:41&#43;08:00'/><meta property='article:modified_time' content='2021-12-22T22:38:41&#43;08:00'/><meta property='og:image' content='https://ypy.7bao.fun/img/xps-EzYq1HOl5_8-unsplash.jpg' />
 <meta name="twitter:title" content="[操作系统实验] ucore 环境准备">
-<meta name="twitter:description" content="环境准备 1. 准备一台装有 ubuntu 操作系统的机器 建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端   ps：小豹子挺可爱的
-2. 安装环境  gcc: 编译 c&#43;&#43; make: 自动编译或测试代码 gdb: 调试代码 cgdb: 字符方式调试代码 qemu: 调试内核，实验中搭配 cgdb 使用 git: 获取实验所需代码 vscode: 编写代码 vim: 偶尔也会在终端用 vim 查看代码  3. 实验资料 实验资料 实验指导书 .
+<meta name="twitter:description" content="[实验] ucore 环境准备 环境准备 1. 准备一台装有 ubuntu 操作系统的机器 建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端
+ https://ypy.7bao.fun/img/20211222204823.png 
+ps：小豹子挺可爱的
+2. 安装环境  gcc: 编译 c&#43;&#43; make: 自动编译或测试代码 gdb: 调试代码 cgdb: 字符方式调试代码 qemu: 调试内核，实验中搭配 cgdb 使用 git: 获取实验所需代码 vscode: 编写代码 vim: 偶尔也会在终端用 vim 查看代码  3. 实验资料 https://github.com/chyyuu/os_course_info
+Introduction
+Introduction
 4. 获取代码 根据实验资料查到项目地址，非常友好的开源了，没有放在清华的内网。
-git clone https://github.com/chyyuu/os_kernel_lab.git 这样获取到的代码默认是 rust 语言实现的，目前我学习的是 c 语言实现，所以切换到 master 分支 （后续实验完成了希望能用 rust 也实现一遍)
-git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实验操作过程
-# 进入代码 lab1 的答案目录 cd os_kernel_lab/labcodes_answer/lab1_result # 清理上次构建的产物（首次可以不用清理） make clean # 启动 qemu make qemu   能成功看到不停的有 ticks 输出即可"><meta name="twitter:card" content="summary_large_image">
+git clone &amp;lt;https://github.com/chyyuu/os_kernel_lab.git 这样获取到的代码默认是 rust 语言实现的，目前我学习的是 c 语言实现，所以切换到 master 分支 （后续实验完成了希望能用 rust 也实现一遍)
+git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实验操作过程"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://ypy.7bao.fun/img/xps-EzYq1HOl5_8-unsplash.jpg' />
     </head>
     <body class="
@@ -122,7 +131,7 @@ git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实
 
 
                 <time class="article-time--reading">
-                    1 minute read
+                    2 minute read
                 </time>
             </div>
         
@@ -132,10 +141,11 @@ git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实
 </header>
 
     <section class="article-content">
-    <h1 id="环境准备">环境准备</h1>
+    <h1 id="实验-ucore-环境准备">[实验] ucore 环境准备</h1>
+<h1 id="环境准备">环境准备</h1>
 <h3 id="1-准备一台装有-ubuntu-操作系统的机器">1. 准备一台装有 ubuntu 操作系统的机器</h3>
-<p>建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端
-<figure 
+<p>建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端</p>
+<p><figure 
 	>
 	<a href="https://ypy.7bao.fun/img/20211222204823.png" >
 		<img src="https://ypy.7bao.fun/img/20211222204823.png"
@@ -143,11 +153,13 @@ git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实
 			
 			
 			loading="lazy"
-			>
+			alt="https://ypy.7bao.fun/img/20211222204823.png">
 	</a>
 	
-</figure>
-ps：小豹子挺可爱的</p>
+	<figcaption><a href="https://ypy.7bao.fun/img/20211222204823.png">https://ypy.7bao.fun/img/20211222204823.png</a></figcaption>
+	
+</figure></p>
+<p>ps：小豹子挺可爱的</p>
 <h3 id="2-安装环境">2. 安装环境</h3>
 <ul>
 <li><code>gcc</code>: 编译 c++</li>
@@ -161,17 +173,19 @@ ps：小豹子挺可爱的</p>
 </ul>
 <h3 id="3-实验资料">3. 实验资料</h3>
 <p><a class="link" href="https://github.com/chyyuu/os_course_info"  target="_blank" rel="noopener"
-    >实验资料</a>
-<a class="link" href="https://chyyuu.gitbooks.io/ucore_os_docs/content/"  target="_blank" rel="noopener"
-    >实验指导书</a> .</p>
+    >https://github.com/chyyuu/os_course_info</a></p>
+<p><a class="link" href="https://chyyuu.gitbooks.io/ucore_os_docs/content/"  target="_blank" rel="noopener"
+    >Introduction</a></p>
+<p><a class="link" href="https://nankai.gitbook.io/ucore-os-on-risc-v64/"  target="_blank" rel="noopener"
+    >Introduction</a></p>
 <h3 id="4-获取代码">4. 获取代码</h3>
 <p>根据实验资料查到项目地址，非常友好的开源了，没有放在清华的内网。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git clone https://github.com/chyyuu/os_kernel_lab.git
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git clone &lt;https://github.com/chyyuu/os_kernel_lab.git
 </code></pre></div><p>这样获取到的代码默认是 <code>rust</code> 语言实现的，目前我学习的是 <code>c</code> 语言实现，所以切换到 <code>master</code> 分支 （后续实验完成了希望能用 <code>rust</code> 也实现一遍)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git checkout master
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git checkout master
 </code></pre></div><h3 id="5验证环境">5.验证环境</h3>
 <p>可以参考视频 学堂在线 2.7 演示实验操作过程</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 进入代码 lab1 的答案目录</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 进入代码 lab1 的答案目录</span>
 <span class="nb">cd</span> os_kernel_lab/labcodes_answer/lab1_result
 
 <span class="c1"># 清理上次构建的产物（首次可以不用清理）</span>
@@ -187,17 +201,19 @@ make qemu
 			
 			
 			loading="lazy"
-			>
+			alt="https://ypy.7bao.fun/img/20211222210237.png">
 	</a>
 	
-</figure>
-能成功看到不停的有 ticks 输出即可</p>
+	<figcaption><a href="https://ypy.7bao.fun/img/20211222210237.png">https://ypy.7bao.fun/img/20211222210237.png</a></figcaption>
+	
+</figure></p>
+<p>能成功看到不停的有 <code>ticks</code> 输出即可</p>
 <h3 id="6-如何-debug">6. 如何 Debug</h3>
 <ul>
 <li>
-<p>使用 <code>cgdb</code> 调试<br>
-在每个 lab 的目录下执行 make debug, 即可弹出 debug 界面
-<figure 
+<p>使用 <code>cgdb</code> 调试
+在每个 lab 的目录下执行 make debug, 即可弹出 debug 界面</p>
+<p><figure 
 	>
 	<a href="https://ypy.7bao.fun/img/20211222222409.png" >
 		<img src="https://ypy.7bao.fun/img/20211222222409.png"
@@ -205,19 +221,22 @@ make qemu
 			
 			
 			loading="lazy"
-			>
+			alt="https://ypy.7bao.fun/img/20211222222409.png">
 	</a>
+	
+	<figcaption><a href="https://ypy.7bao.fun/img/20211222222409.png">https://ypy.7bao.fun/img/20211222222409.png</a></figcaption>
 	
 </figure></p>
 </li>
 <li>
-<p>使用 <code>vscode</code> 调试</p>
-<p>需要预先填好 <code>vscode debug</code> 配置文件<br>
-<code>launch.json</code> 文件</p>
+<p>使用 <code>vscode</code> 调试
+效果上比 <code>cgdb</code> 强了不少，可惜不能调试 <code>bootmain.c</code></p>
+<p>需要预先填好下面的 <code>vscode debug</code> 配置文件</p>
+<p><code>launch.json</code> 文件</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-<span class="c1">// 使用 IntelliSense 了解相关属性。 
+<span class="c1">// 使用 IntelliSense 了解相关属性。
 </span><span class="c1">// 悬停以查看现有属性的描述。
-</span><span class="c1">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+</span><span class="c1">// 欲了解更多信息，请访问: &lt;https://go.microsoft.com/fwlink/?linkid=830387&gt;
 </span><span class="c1"></span><span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;0.2.0&#34;</span><span class="p">,</span>
 <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
@@ -244,38 +263,49 @@ make qemu
     <span class="p">}</span>
 <span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div><pre tabindex="0"><code>
 
-asks.json` 文件  
+</code></pre></div><p><code>tasks.json</code> 文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+	<span class="nt">&#34;tasks&#34;</span><span class="p">:</span> <span class="p">[</span>
+		<span class="p">{</span>
+  			<span class="nt">&#34;label&#34;</span><span class="p">:</span> <span class="s2">&#34;make-gdb&#34;</span><span class="p">,</span>
+  			<span class="nt">&#34;command&#34;</span><span class="p">:</span> <span class="s2">&#34;make&#34;</span><span class="p">,</span>
+  			<span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[</span>
+    			<span class="s2">&#34;gdb&#34;</span>
+  			<span class="p">],</span>
+  			<span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
+  			<span class="nt">&#34;isBackground&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  			<span class="nt">&#34;problemMatcher&#34;</span><span class="p">:</span> <span class="p">{</span>
+    			<span class="nt">&#34;pattern&#34;</span><span class="p">:</span> <span class="p">{</span>
+      				<span class="nt">&#34;regexp&#34;</span><span class="p">:</span> <span class="s2">&#34;.&#34;</span>
+    			<span class="p">},</span>
+    			<span class="nt">&#34;background&#34;</span><span class="p">:</span> <span class="p">{</span>
+   		 			<span class="nt">&#34;activeOnStart&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    				<span class="nt">&#34;beginsPattern&#34;</span><span class="p">:</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span>
+    				<span class="nt">&#34;endsPattern&#34;</span><span class="p">:</span> <span class="s2">&#34;.&#34;</span>
+    			<span class="p">},</span>
+			<span class="p">},</span>
+		<span class="p">}</span>
+	<span class="p">],</span>
+	<span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;2.0.0&#34;</span>
+<span class="p">}</span>
 
-`json
- 	&quot;tasks&quot;: [
- 		{
-   			&quot;label&quot;: &quot;make-gdb&quot;,
-   			&quot;command&quot;: &quot;make&quot;,
-   			&quot;args&quot;: [
-     			&quot;gdb&quot;
-   			],
-   			&quot;type&quot;: &quot;shell&quot;,
-   			&quot;isBackground&quot;: true,
-   			&quot;problemMatcher&quot;: {
-     			&quot;pattern&quot;: {
-       				&quot;regexp&quot;: &quot;.&quot;
-     			},
-     			&quot;background&quot;: {
-    		 			&quot;activeOnStart&quot;: true,
-     				&quot;beginsPattern&quot;: &quot;.&quot;,
-     				&quot;endsPattern&quot;: &quot;.&quot;
-     			},
- 			},
- 		}
- 	],
- 	&quot;version&quot;: &quot;2.0.0&quot;
-</code></pre><pre tabindex="0"><code>
-  点击 `vscode` 的 `debug` 按钮， 会出现如图所示的效果
-
-  ![](https://ypy.7bao.fun/img/20211222222255.png)
-  效果上比 `cgdb` 强了不少，可惜不能调试 `bootmain.c`</code></pre></li>
+</code></pre></div><p>点击 <code>vscode</code> 的 <code>debug</code> 按钮， 会出现如图所示的效果</p>
+<p><figure 
+	>
+	<a href="https://ypy.7bao.fun/img/20211222222255.png" >
+		<img src="https://ypy.7bao.fun/img/20211222222255.png"
+			
+			
+			
+			loading="lazy"
+			alt="https://ypy.7bao.fun/img/20211222222255.png">
+	</a>
+	
+	<figcaption><a href="https://ypy.7bao.fun/img/20211222222255.png">https://ypy.7bao.fun/img/20211222222255.png</a></figcaption>
+	
+</figure></p>
+</li>
 </ul>
 
 </section>
