@@ -6,7 +6,16 @@
     <description>Recent content in Categories on gaffey的开发日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Feb 2022 10:00:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Feb 2022 11:19:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang</title>
+      <link>https://blog.7bao.fun/categories/golang/</link>
+      <pubDate>Thu, 24 Feb 2022 11:19:41 +0800</pubDate>
+      
+      <guid>https://blog.7bao.fun/categories/golang/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>OS</title>
       <link>https://blog.7bao.fun/categories/os/</link>
@@ -31,15 +40,6 @@
       <pubDate>Fri, 03 Dec 2021 13:17:01 +0800</pubDate>
       
       <guid>https://blog.7bao.fun/categories/ide/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Golang</title>
-      <link>https://blog.7bao.fun/categories/golang/</link>
-      <pubDate>Wed, 01 Dec 2021 19:17:41 +0800</pubDate>
-      
-      <guid>https://blog.7bao.fun/categories/golang/</guid>
       <description></description>
     </item>
     

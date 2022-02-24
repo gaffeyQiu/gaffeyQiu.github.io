@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Golang Sync.WaitGroup 使用及原理 使用 func main() { var wg sync.WaitGroup for i := 0; i &amp;lt; 10; i&#43;&#43; { wg.Add(1) go func() { defer wg.Done() fmt.Println(&amp;#34;Hello WaitGroup!&amp;#34;) }() } wg.Wait() } 实现 首先看 waitgroup 到底是什么数据结构
+type WaitGroup struct { noCopy noCopy state1 [3]uint32 } nocopy 避免这个结构体被复制的一个技巧，可以告诉go vet工具违反了复制使用的规则 state1 [3]uint32 字段中包含了 waitgroup 的所有状态信息, 根据标准库上自带的注释简单翻译是：state1 由 12 个字节组成，其中将8字节看作64位值，其中高32位存放的是 counter 计数器, 代表目前还未完成的 goroutine个数，低32位存放的是 waiter 计数器, 可以理解成下面这个结构体
+type WaitGroup struct { // 代表目前尚未完成的个数 	// WaitGroup.'><title>Golang Sync.WaitGroup 使用及原理</title>
+
+<link rel='canonical' href='https://blog.7bao.fun/p/golang-sync.waitgroup-%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.css"><meta property='og:title' content='Golang Sync.WaitGroup 使用及原理'>
+<meta property='og:description' content='Golang Sync.WaitGroup 使用及原理 使用 func main() { var wg sync.WaitGroup for i := 0; i &amp;lt; 10; i&#43;&#43; { wg.Add(1) go func() { defer wg.Done() fmt.Println(&amp;#34;Hello WaitGroup!&amp;#34;) }() } wg.Wait() } 实现 首先看 waitgroup 到底是什么数据结构
+type WaitGroup struct { noCopy noCopy state1 [3]uint32 } nocopy 避免这个结构体被复制的一个技巧，可以告诉go vet工具违反了复制使用的规则 state1 [3]uint32 字段中包含了 waitgroup 的所有状态信息, 根据标准库上自带的注释简单翻译是：state1 由 12 个字节组成，其中将8字节看作64位值，其中高32位存放的是 counter 计数器, 代表目前还未完成的 goroutine个数，低32位存放的是 waiter 计数器, 可以理解成下面这个结构体
+type WaitGroup struct { // 代表目前尚未完成的个数 	// WaitGroup.'>
+<meta property='og:url' content='https://blog.7bao.fun/p/golang-sync.waitgroup-%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/'>
+<meta property='og:site_name' content='gaffey的开发日志'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Go' /><meta property='article:tag' content='源码分析' /><meta property='article:published_time' content='2022-02-24T11:17:41&#43;08:00'/><meta property='article:modified_time' content='2022-02-24T11:17:41&#43;08:00'/><meta property='og:image' content='https://ypy.7bao.fun/img/20220224113450.png' />
+<meta name="twitter:title" content="Golang Sync.WaitGroup 使用及原理">
+<meta name="twitter:description" content="Golang Sync.WaitGroup 使用及原理 使用 func main() { var wg sync.WaitGroup for i := 0; i &amp;lt; 10; i&#43;&#43; { wg.Add(1) go func() { defer wg.Done() fmt.Println(&amp;#34;Hello WaitGroup!&amp;#34;) }() } wg.Wait() } 实现 首先看 waitgroup 到底是什么数据结构
+type WaitGroup struct { noCopy noCopy state1 [3]uint32 } nocopy 避免这个结构体被复制的一个技巧，可以告诉go vet工具违反了复制使用的规则 state1 [3]uint32 字段中包含了 waitgroup 的所有状态信息, 根据标准库上自带的注释简单翻译是：state1 由 12 个字节组成，其中将8字节看作64位值，其中高32位存放的是 counter 计数器, 代表目前还未完成的 goroutine个数，低32位存放的是 waiter 计数器, 可以理解成下面这个结构体
+type WaitGroup struct { // 代表目前尚未完成的个数 	// WaitGroup."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://ypy.7bao.fun/img/20220224113450.png' />
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/golang-sync.waitgroup-%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/">
+                
+                    <img src="https://ypy.7bao.fun/img/20220224113450.png" loading="lazy" alt="Featured image of post Golang Sync.WaitGroup 使用及原理" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/golang/" style="background-color: #2a9d8f; color: #fff;">
+                Golang
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/p/golang-sync.waitgroup-%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/">Golang Sync.WaitGroup 使用及原理</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 24, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <h1 id="golang-syncwaitgroup-使用及原理">Golang Sync.WaitGroup 使用及原理</h1>
+<h2 id="使用">使用</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+		<span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+			<span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Hello WaitGroup!&#34;</span><span class="p">)</span>
+		<span class="p">}()</span>
+	<span class="p">}</span>
+	<span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="实现">实现</h2>
+<p>首先看 waitgroup 到底是什么数据结构</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">WaitGroup</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">noCopy</span> <span class="nx">noCopy</span>
+	<span class="nx">state1</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">uint32</span>
+<span class="p">}</span>
+</code></pre></div><p><code>nocopy</code> 避免这个结构体被复制的一个技巧，可以告诉<code>go vet</code>工具违反了复制使用的规则
+<code>state1 [3]uint32</code> 字段中包含了 waitgroup 的所有状态信息, 根据标准库上自带的注释简单翻译是：state1 由 12 个字节组成，其中将8字节看作64位值，其中高32位存放的是 counter 计数器, 代表目前还未完成的 goroutine个数，低32位存放的是 waiter 计数器, 可以理解成下面这个结构体</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">WaitGroup</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="c1">// 代表目前尚未完成的个数
+</span><span class="c1"></span>	<span class="c1">// WaitGroup.Add(n) 将会导致 counter += n
+</span><span class="c1"></span>	<span class="c1">// WaitGroup.Done() 将导致 counter--
+</span><span class="c1"></span>	<span class="nx">counter</span> <span class="kt">uint32</span>
+
+	<span class="c1">// 目前已调用 WaitGroup.Wait 的 goroutine 的个数
+</span><span class="c1"></span>	<span class="nx">waiter</span>  <span class="kt">uint32</span>
+
+	<span class="c1">// 对应于 golang 中 runtime 内部的信号量的实现
+</span><span class="c1"></span>	<span class="c1">// runtime_Semacquire 表示增加一个信号量，并挂起当前 goroutine
+</span><span class="c1"></span>	<span class="c1">// runtime_Semrelease 表示减少一个信号量，并唤醒 sema 上其中一个正在等待的 goroutine
+</span><span class="c1"></span>	<span class="nx">sema</span>    <span class="kt">uint32</span>
+<span class="p">}</span>
+</code></pre></div><p>整个使用流程为：</p>
+<ol>
+<li>当调用 <code>WaitGroup.Add(n)</code> 时，counter 将会自增: <code>counter += n</code></li>
+<li>当调用 <code>WaitGroup.Wait()</code> 时，会将 <code>waiter++</code>。同时调用 <code>runtime_Semacquire(semap)</code>, 增加信号量，并挂起当前 goroutine。</li>
+<li>当调用 <code>WaitGroup.Done()</code> 时，将会 <code>counter--</code>。如果自减后的 counter 等于 0，说明 WaitGroup 的等待过程已经结束，则需要调用 <code>runtime_Semrelease</code> 释放信号量，唤醒正在 <code>WaitGroup.Wait</code> 的 goroutine。</li>
+</ol>
+<p>源码中是如何拆分 <code>state</code> 字段的</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">wg</span> <span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span> <span class="nf">state</span><span class="p">()</span> <span class="p">(</span><span class="nx">statep</span> <span class="o">*</span><span class="kt">uint64</span><span class="p">,</span> <span class="nx">semap</span> <span class="o">*</span><span class="kt">uint32</span><span class="p">)</span> <span class="p">{</span>  
+   <span class="k">if</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">wg</span><span class="p">.</span><span class="nx">state1</span><span class="p">))</span><span class="o">%</span><span class="mi">8</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>  
+      <span class="c1">// 如果地址是64bit对齐的，数组前两个元素做state，后一个元素做信号量
+</span><span class="c1"></span>	  <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="kt">uint64</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">wg</span><span class="p">.</span><span class="nx">state1</span><span class="p">)),</span> <span class="o">&amp;</span><span class="nx">wg</span><span class="p">.</span><span class="nx">state1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  
+   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// 如果地址是32bit对齐的，数组后两个元素用来做state
+</span><span class="c1"></span>      <span class="c1">// 它可以用来做64bit的原子操作，第一个元素32bit用来做信号量
+</span><span class="c1"></span>      <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="kt">uint64</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">wg</span><span class="p">.</span><span class="nx">state1</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="o">&amp;</span><span class="nx">wg</span><span class="p">.</span><span class="nx">state1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  
+   <span class="p">}</span>  
+<span class="p">}</span>
+</code></pre></div><p>由于我们能使用到的就是 waitgroup.Add(),  waitgroup.Done(), waitgroup.Wait() 这三个方法，就按这三个方法分析</p>
+<h4 id="add-done">Add(), Done()</h4>
+<p>Add 方法主要操作的是 state 的计数部分。你可以为计数值增加一个 delta 值，内部通过原子操作把这个值加到计数值上。需要注意的是，这个 delta 也可以是个负数，相当于为计数值减去一个值，Done 方法内部其实就是通过 Add(-1) 实现的。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">wg</span> <span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span> <span class="nf">Add</span><span class="p">(</span><span class="nx">delta</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>  
+   <span class="c1">// 获取拆开后的 state 字段 
+</span><span class="c1"></span>   <span class="nx">statep</span><span class="p">,</span> <span class="nx">semap</span> <span class="o">:=</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">state</span><span class="p">()</span>  
+   <span class="o">...</span>
+   <span class="o">...</span>
+   <span class="o">...</span>
+   <span class="c1">// 在刚刚说的 int64 的高32位上加伤传进来的 delta 的值， 这一步是原子操作
+</span><span class="c1"></span>   <span class="nx">state</span> <span class="o">:=</span> <span class="nx">atomic</span><span class="p">.</span><span class="nf">AddUint64</span><span class="p">(</span><span class="nx">statep</span><span class="p">,</span> <span class="nb">uint64</span><span class="p">(</span><span class="nx">delta</span><span class="p">)</span><span class="o">&lt;&lt;</span><span class="mi">32</span><span class="p">)</span>  
+   <span class="c1">// 加好后，获取 counter 也就是 v， 和 waiter 也就是 w 的值
+</span><span class="c1"></span>   <span class="c1">// 此时 int64 变为两个 int32
+</span><span class="c1"></span>   <span class="nx">v</span> <span class="o">:=</span> <span class="nb">int32</span><span class="p">(</span><span class="nx">state</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">)</span>  
+   <span class="nx">w</span> <span class="o">:=</span> <span class="nb">uint32</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>  
+   <span class="c1">// 如果 v 变为负数了，程序异常
+</span><span class="c1"></span>   <span class="k">if</span> <span class="nx">v</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="p">{</span>  
+      <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;sync: negative WaitGroup counter&#34;</span><span class="p">)</span>  
+   <span class="p">}</span>  
+   <span class="c1">// 在 wait 没结束之前， 不允许调用 Add 方法
+</span><span class="c1"></span>   <span class="k">if</span> <span class="nx">w</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">delta</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">v</span> <span class="o">==</span> <span class="nb">int32</span><span class="p">(</span><span class="nx">delta</span><span class="p">)</span> <span class="p">{</span>  
+      <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;sync: WaitGroup misuse: Add called concurrently with Wait&#34;</span><span class="p">)</span>  
+   <span class="p">}</span>
+
+   <span class="c1">// 调用 add() 之后, 还有正在执行的 goroutine 或者 waiter 等于 0， 正常返回
+</span><span class="c1"></span>   <span class="k">if</span> <span class="nx">v</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">w</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>  
+      <span class="k">return</span>  
+   <span class="p">}</span>  
+   <span class="c1">// 下面就是非正常返回， 理解到的就是 v 已经等于 0 了，执行释放操作
+</span><span class="c1"></span>   <span class="c1">// 首先就是将 counter 和 waiter 全部重置为 0
+</span><span class="c1"></span> <span class="o">*</span><span class="nx">statep</span> <span class="p">=</span> <span class="mi">0</span>  
+   <span class="c1">// 然后循环调用还在等待的 waiter， 释放信号量
+</span><span class="c1"></span> <span class="k">for</span> <span class="p">;</span> <span class="nx">w</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">w</span><span class="o">--</span> <span class="p">{</span>  
+      <span class="nf">runtime_Semrelease</span><span class="p">(</span><span class="nx">semap</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  
+   <span class="p">}</span>  
+<span class="p">}</span>
+</code></pre></div><h4 id="wait">wait()</h4>
+<p>Wait 方法的实现逻辑是：不断检查 state 的值。如果其中的计数值变为了 0，那么说明所有的任务已完成，调用者不必再等待，直接返回。如果计数值大于 0，说明此时还有任务没完成，那么调用者就变成了等待者，需要加入 waiter 队列，并且阻塞住自己。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">wg</span> <span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span> <span class="nf">Wait</span><span class="p">()</span> <span class="p">{</span>
+   <span class="c1">// 获取信号量和两个计数值
+</span><span class="c1"></span>   <span class="nx">statep</span><span class="p">,</span> <span class="nx">semap</span> <span class="o">:=</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">state</span><span class="p">()</span>  
+
+   <span class="c1">// 不停的循环检查 counter 和 waiter
+</span><span class="c1"></span>   <span class="k">for</span> <span class="p">{</span>
+      <span class="c1">// 先原子性的取出 counter 和 waiter
+</span><span class="c1"></span>      <span class="nx">state</span> <span class="o">:=</span> <span class="nx">atomic</span><span class="p">.</span><span class="nf">LoadUint64</span><span class="p">(</span><span class="nx">statep</span><span class="p">)</span>  
+      <span class="nx">v</span> <span class="o">:=</span> <span class="nb">int32</span><span class="p">(</span><span class="nx">state</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">)</span>  
+      <span class="nx">w</span> <span class="o">:=</span> <span class="nb">uint32</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
+      <span class="k">if</span> <span class="nx">v</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>  
+         <span class="c1">// counter 已经没有了，函数可以返回
+</span><span class="c1"></span>         <span class="k">return</span>  
+ <span class="p">}</span>  
+      <span class="c1">// 将 waiter 数 + 1
+</span><span class="c1"></span> <span class="k">if</span> <span class="nx">atomic</span><span class="p">.</span><span class="nf">CompareAndSwapUint64</span><span class="p">(</span><span class="nx">statep</span><span class="p">,</span> <span class="nx">state</span><span class="p">,</span> <span class="nx">state</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>  
+         <span class="c1">// 放到信号量队列, 并且阻塞住自己
+</span><span class="c1"></span>         <span class="nf">runtime_Semacquire</span><span class="p">(</span><span class="nx">semap</span><span class="p">)</span>
+         <span class="c1">// 如果被唤醒，检查 两个计数是否已经为0 了， 如果不为0 ，则触发恐慌
+</span><span class="c1"></span>         <span class="k">if</span> <span class="o">*</span><span class="nx">statep</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>  
+            <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;sync: WaitGroup is reused before previous Wait has returned&#34;</span><span class="p">)</span>  
+         <span class="p">}</span>
+          <span class="c1">// 函数返回
+</span><span class="c1"></span>         <span class="k">return</span>  
+ <span class="p">}</span>  
+   <span class="p">}</span>  
+<span class="p">}</span>
+</code></pre></div><h3 id="总结">总结</h3>
+<ol>
+<li>保证计数器不能为负值</li>
+<li>保证 Add() 方法全部调用完成之后再调用 Wait()</li>
+<li>waitgroup 可以重复使用</li>
+<li>atomic 原子操作代替锁, 提高并发性</li>
+<li>合并两个 int32 为一个 int64 提高读取存入数据性能</li>
+<li>对于不希望被复制的结构体， 可以使用 noCopy 字段</li>
+</ol>
+<h3 id="reference">reference</h3>
+<p><a class="link" href="https://www.cyhone.com/articles/golang-waitgroup/"  target="_blank" rel="noopener"
+    >https://www.cyhone.com/articles/golang-waitgroup/</a>
+<a class="link" href="https://time.geekbang.org/column/intro/100061801?tab=catalog"  target="_blank" rel="noopener"
+    >https://time.geekbang.org/column/intro/100061801?tab=catalog</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/go/">Go</a>
+        
+            <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="has-image">
+    <a href="/p/golang-sync.pool-%E5%8E%9F%E7%90%86/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://ypy.7bao.fun/img/20220224113735.png" loading="lazy" data-key="" data-hash="https://ypy.7bao.fun/img/20220224113735.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Golang Sync.Pool 原理</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/golang-sync.mutex-%E4%BD%BF%E7%94%A8%E5%8F%8A%E5%8E%9F%E7%90%86/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://ypy.7bao.fun/img/20220224113610.png" loading="lazy" data-key="" data-hash="https://ypy.7bao.fun/img/20220224113610.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Golang Sync.Mutex 使用及原理</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="has-image">
+    <a href="/p/gin-%E5%A6%82%E4%BD%95%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B-swagger-%E6%96%87%E6%A1%A3/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://ypy.7bao.fun/img/20211201201550.png" loading="lazy" data-key="" data-hash="https://ypy.7bao.fun/img/20211201201550.png"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Gin 如何动态生成模型 swagger 文档</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <p><a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank">本网站由<img src="https://cdn.learnku.com/uploads/banners/XPtLlZmIN1cQbLuDFEON.png!large" width="100">CDN驱动</p>
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2022 gaffey的开发日志
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.5.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#使用">使用</a></li>
+    <li><a href="#实现">实现</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#add-done">Add(), Done()</a></li>
+            <li><a href="#wait">wait()</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结">总结</a></li>
+        <li><a href="#reference">reference</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
