@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>操作系统 on gaffey的开发日志</title>
+    <link>https://blog.7bao.fun/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+    <description>Recent content in 操作系统 on gaffey的开发日志</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 22 Dec 2021 22:38:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[操作系统实验] ucore 环境准备</title>
+      <link>https://blog.7bao.fun/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C-ucore-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/</link>
+      <pubDate>Wed, 22 Dec 2021 22:38:41 +0800</pubDate>
+      
+      <guid>https://blog.7bao.fun/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C-ucore-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/</guid>
+      <description>[实验] ucore 环境准备 环境准备 1. 准备一台装有 ubuntu 操作系统的机器 建议是在虚拟机里面安装一个 ubuntu， 避免对自己机器的影响， 我安装的是当时最新版本ubuntu桌面端
+ https://ypy.7bao.fun/img/20211222204823.png 
+ps：小豹子挺可爱的
+2. 安装环境  gcc: 编译 c++ make: 自动编译或测试代码 gdb: 调试代码 cgdb: 字符方式调试代码 qemu: 调试内核，实验中搭配 cgdb 使用 git: 获取实验所需代码 vscode: 编写代码 vim: 偶尔也会在终端用 vim 查看代码  3. 实验资料 https://github.com/chyyuu/os_course_info
+Introduction
+Introduction
+4. 获取代码 根据实验资料查到项目地址，非常友好的开源了，没有放在清华的内网。
+git clone &amp;lt;https://github.com/chyyuu/os_kernel_lab.git 这样获取到的代码默认是 rust 语言实现的，目前我学习的是 c 语言实现，所以切换到 master 分支 （后续实验完成了希望能用 rust 也实现一遍)
+git checkout master 5.验证环境 可以参考视频 学堂在线 2.7 演示实验操作过程</description>
+    </item>
+    
+  </channel>
+</rss>
