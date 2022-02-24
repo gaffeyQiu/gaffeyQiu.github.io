@@ -6,13 +6,13 @@
     <description>Recent content in Categories on gaffey的开发日志</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Dec 2021 22:38:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Feb 2022 10:00:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>操作系统</title>
-      <link>https://blog.7bao.fun/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
-      <pubDate>Wed, 22 Dec 2021 22:38:41 +0800</pubDate>
+      <title>OS</title>
+      <link>https://blog.7bao.fun/categories/os/</link>
+      <pubDate>Thu, 24 Feb 2022 10:00:41 +0800</pubDate>
       
-      <guid>https://blog.7bao.fun/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
+      <guid>https://blog.7bao.fun/categories/os/</guid>
       <description></description>
     </item>
     
@@ -49,15 +49,6 @@
       <pubDate>Wed, 01 Dec 2021 11:37:00 +0800</pubDate>
       
       <guid>https://blog.7bao.fun/categories/kubernetes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>操作系统</title>
-      <link>https://blog.7bao.fun/categories/os/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.7bao.fun/categories/os/</guid>
       <description></description>
     </item>
     

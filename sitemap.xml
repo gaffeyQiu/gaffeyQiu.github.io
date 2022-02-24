@@ -2,28 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.7bao.fun/categories/</loc>
+    <lastmod>2022-02-24T10:00:41+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/</loc>
+    <lastmod>2022-02-24T10:00:41+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/tags/os/</loc>
+    <lastmod>2022-02-24T10:00:41+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/categories/os/</loc>
+    <lastmod>2022-02-24T10:00:41+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/post/</loc>
+    <lastmod>2022-02-24T10:00:41+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/tags/</loc>
+    <lastmod>2022-02-24T10:00:41+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2022-02-24T10:00:41+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.7bao.fun/p/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1inter-process-communication/</loc>
+    <lastmod>2022-02-24T10:00:41+08:00</lastmod>
+  </url><url>
     <loc>https://blog.7bao.fun/p/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C-ucore-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/</loc>
     <lastmod>2021-12-22T22:38:41+08:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/tags/c/</loc>
-    <lastmod>2021-12-22T22:38:41+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.7bao.fun/categories/</loc>
-    <lastmod>2021-12-22T22:38:41+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.7bao.fun/</loc>
-    <lastmod>2021-12-22T22:38:41+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.7bao.fun/post/</loc>
-    <lastmod>2021-12-22T22:38:41+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.7bao.fun/tags/</loc>
-    <lastmod>2021-12-22T22:38:41+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.7bao.fun/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2021-12-22T22:38:41+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.7bao.fun/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2021-12-22T22:38:41+08:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/p/%E7%BF%BB%E8%AF%91how-does-a-database-work/</loc>
@@ -87,7 +93,5 @@
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://blog.7bao.fun/pages/search/</loc>
-  </url><url>
-    <loc>https://blog.7bao.fun/categories/os/</loc>
   </url>
 </urlset>
