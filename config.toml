@@ -11,9 +11,38 @@ title = "开发笔记"
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "LoveIt"
 
+# 网站默认主题样式 ("light", "dark", "auto")
+defaultTheme = "auto"
+
+
+
 [params]
   # LoveIt 主题版本
   version = "0.2.X"
+
+  # 主页配置
+  [params.home]
+      rss = 10
+    # 主页个人信息
+    [params.home.profile]
+      enable = true
+      # Gravatar 邮箱，用于优先在主页显示的头像
+      gravatarEmail = ""
+      # 主页显示头像的 URL
+      avatarURL = "https://ypy.7bao.fun/img/v2-2a4747b8abcc411896fc8ae0d6d59a67_xl.png"
+      title = "gaffey"
+      # 主页显示的网站副标题
+      subtitle = "开发笔记"
+      # 是否为副标题显示打字机动画
+      typeit = true
+      # 是否显示社交账号
+      social = true
+
+  # 页面底部信息配置
+  [params.footer]
+    enable = true
+    custom = '本网站由<img src="https://ypy.7bao.fun/img/又拍云_logo6.png" style="height: 23px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">提供'
+
 
 [menu]
   [[menu.main]]
