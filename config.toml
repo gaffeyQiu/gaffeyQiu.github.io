@@ -37,6 +37,25 @@ defaultTheme = "dark"
       typeit = true
       # 是否显示社交账号
       social = true
+  
+  [params.page]
+
+    [params.page.comment]
+      enable = true
+      [params.page.comment.valine]  
+        enable = true
+        appId = "p1dACPpmbY1sLzIzoGWixqXT-gzGzoHsz"
+        appKey = "Ojsa2hirGkmRfqiezMd3DiXR"
+        placeholder = ""
+        avatar = "mp"
+        meta= ""
+        pageSize = 10
+        lang = ""
+        visitor = true
+        recordIP = true
+        highlight = true
+        enableQQ = false
+        serverURLs = ""
 
   # 页面底部信息配置
   [params.footer]
