@@ -3,12 +3,19 @@
         <title>所有文章 - 开发笔记</title>
         <link>https://blog.7bao.fun/posts/</link>
         <description>所有文章 | 开发笔记</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 07 Mar 2022 19:39:08 &#43;0800</lastBuildDate><atom:link href="https://blog.7bao.fun/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Fisrt_post</title>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 07 Mar 2022 20:28:10 &#43;0800</lastBuildDate><atom:link href="https://blog.7bao.fun/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker Daemon 介绍</title>
+    <link>https://blog.7bao.fun/posts/docker_daemon/</link>
+    <pubDate>Mon, 07 Mar 2022 20:28:10 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.7bao.fun/posts/docker_daemon/</guid>
+    <description><![CDATA[Docker Deamon 介绍 摘抄自《深入浅出docker》 Docker 引擎 Docker 引擎是用来运行和管理容器的核心软件。 基于开放容器计划OCI相关标准，Docker引擎采用了模块]]></description>
+</item><item>
+    <title>fisrt_post</title>
     <link>https://blog.7bao.fun/posts/first_post/</link>
     <pubDate>Mon, 07 Mar 2022 19:39:08 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://blog.7bao.fun/posts/first_post/</guid>
-    <description><![CDATA[Hello World!]]></description>
+    <description><![CDATA[免费套路 无服务器，买个域名，借助 github action 自动发布，白嫖又拍云的图床和cdn加速，域名SSL 证书腾讯云签发，舒服!]]></description>
 </item></channel>
 </rss>
