@@ -1,56 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Categories on gaffey的开发日志</title>
-    <link>https://blog.7bao.fun/categories/</link>
-    <description>Recent content in Categories on gaffey的开发日志</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 24 Feb 2022 11:19:41 +0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Golang</title>
-      <link>https://blog.7bao.fun/categories/golang/</link>
-      <pubDate>Thu, 24 Feb 2022 11:19:41 +0800</pubDate>
-      
-      <guid>https://blog.7bao.fun/categories/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>OS</title>
-      <link>https://blog.7bao.fun/categories/os/</link>
-      <pubDate>Thu, 24 Feb 2022 10:00:41 +0800</pubDate>
-      
-      <guid>https://blog.7bao.fun/categories/os/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Database</title>
-      <link>https://blog.7bao.fun/categories/database/</link>
-      <pubDate>Fri, 17 Dec 2021 16:08:41 +0800</pubDate>
-      
-      <guid>https://blog.7bao.fun/categories/database/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>IDE</title>
-      <link>https://blog.7bao.fun/categories/ide/</link>
-      <pubDate>Fri, 03 Dec 2021 13:17:01 +0800</pubDate>
-      
-      <guid>https://blog.7bao.fun/categories/ide/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Kubernetes</title>
-      <link>https://blog.7bao.fun/categories/kubernetes/</link>
-      <pubDate>Wed, 01 Dec 2021 11:37:00 +0800</pubDate>
-      
-      <guid>https://blog.7bao.fun/categories/kubernetes/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - 分类 - 开发笔记</title>
+        <link>https://blog.7bao.fun/categories/</link>
+        <description>Categories - 分类 - 开发笔记</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="https://blog.7bao.fun/categories/" rel="self" type="application/rss+xml" /></channel>
 </rss>
