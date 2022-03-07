@@ -12,7 +12,7 @@ title = "开发笔记"
 theme = "LoveIt"
 
 # 网站默认主题样式 ("light", "dark", "auto")
-defaultTheme = "auto"
+defaultTheme = "dark"
 
 
 
