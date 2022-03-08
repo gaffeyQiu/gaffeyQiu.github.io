@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>client-go - 标签 - 开发笔记</title>
+        <link>https://blog.7bao.fun/tags/client-go/</link>
+        <description>client-go - 标签 - 开发笔记</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 08 Mar 2022 20:13:25 &#43;0800</lastBuildDate><atom:link href="https://blog.7bao.fun/tags/client-go/" rel="self" type="application/rss+xml" /><item>
+    <title>client-go 简单介绍和使用</title>
+    <link>https://blog.7bao.fun/posts/client-go/</link>
+    <pubDate>Tue, 08 Mar 2022 20:13:25 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.7bao.fun/posts/client-go/</guid>
+    <description><![CDATA[client-go 库 client-go 是用 Golang 语言编写的官方编程式交互客户端库，提供对 Kubernetes API server 服务的交互访问。 其源码目录结构如下： RESTClient 客户端 RESTClient 是最基础的客户端，其他的 Client]]></description>
+</item></channel>
+</rss>

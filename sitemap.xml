@@ -2,13 +2,17 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://blog.7bao.fun/categories/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/categories/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/tags/client-go/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/posts/client-go/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/tags/kubernetes/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/categories/kubernetes/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/posts/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/tags/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/tags/docker/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/categories/docker/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/posts/docker_daemon/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/posts/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/tags/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/posts/first_post/</loc><lastmod>2022-03-07T19:39:08&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/tags/%E9%9A%8F%E7%AC%94/</loc><lastmod>2022-03-07T19:39:08&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/categories/%E9%9A%8F%E7%AC%94/</loc><lastmod>2022-03-07T19:39:08&#43;08:00</lastmod></url></urlset>
