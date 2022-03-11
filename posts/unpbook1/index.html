@@ -5,30 +5,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Docker Daemon 介绍 - 开发笔记</title><meta name="Description" content=""><meta property="og:title" content="Docker Daemon 介绍" />
-<meta property="og:description" content="Docker Deamon 介绍 摘抄自《深入浅出docker》 Docker 引擎 Docker 引擎是用来运行和管理容器的核心软件。 基于开放容器计划OCI相关标准，Docker引擎采用了模块" />
+        <title>[笔记]《Unix网络编程卷一》第一章 - 开发笔记</title><meta name="Description" content=""><meta property="og:title" content="[笔记]《Unix网络编程卷一》第一章" />
+<meta property="og:description" content="环境搭建 只考虑 Linux 环境的话 获取源代码 git clone https://github.com/unpbook/unpv13e.git cd unpv13e ./configure cd lib make cd ../libfree make 验证环境是否成功 cd ../intro make all // 先在一个终端启动服务端 ./daytimetcpsrv // 另一个终端执行客户端，能正常返" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.7bao.fun/posts/docker_daemon/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-03-07T20:28:10+08:00" />
-<meta property="article:modified_time" content="2022-03-07T20:28:10+08:00" />
+<meta property="og:url" content="https://blog.7bao.fun/posts/unpbook1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-11T23:14:18+08:00" />
+<meta property="article:modified_time" content="2022-03-11T23:14:18+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Docker Daemon 介绍"/>
-<meta name="twitter:description" content="Docker Deamon 介绍 摘抄自《深入浅出docker》 Docker 引擎 Docker 引擎是用来运行和管理容器的核心软件。 基于开放容器计划OCI相关标准，Docker引擎采用了模块"/>
+<meta name="twitter:title" content="[笔记]《Unix网络编程卷一》第一章"/>
+<meta name="twitter:description" content="环境搭建 只考虑 Linux 环境的话 获取源代码 git clone https://github.com/unpbook/unpv13e.git cd unpv13e ./configure cd lib make cd ../libfree make 验证环境是否成功 cd ../intro make all // 先在一个终端启动服务端 ./daytimetcpsrv // 另一个终端执行客户端，能正常返"/>
 <meta name="application-name" content="开发笔记">
 <meta name="apple-mobile-web-app-title" content="开发笔记"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.7bao.fun/posts/docker_daemon/" /><link rel="prev" href="https://blog.7bao.fun/posts/first_post/" /><link rel="next" href="https://blog.7bao.fun/posts/client-go/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.7bao.fun/posts/unpbook1/" /><link rel="prev" href="https://blog.7bao.fun/posts/client-go/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Docker Daemon 介绍",
+        "headline": "[笔记]《Unix网络编程卷一》第一章",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/blog.7bao.fun\/posts\/docker_daemon\/"
-        },"genre": "posts","keywords": "docker","wordcount":  1349 ,
-        "url": "https:\/\/blog.7bao.fun\/posts\/docker_daemon\/","datePublished": "2022-03-07T20:28:10+08:00","dateModified": "2022-03-07T20:28:10+08:00","publisher": {
+            "@id": "https:\/\/blog.7bao.fun\/posts\/unpbook1\/"
+        },"genre": "posts","keywords": "TCP\/IP, network, socket","wordcount":  554 ,
+        "url": "https:\/\/blog.7bao.fun\/posts\/unpbook1\/","datePublished": "2022-03-11T23:14:18+08:00","dateModified": "2022-03-11T23:14:18+08:00","publisher": {
             "@type": "Organization",
             "name": "gaffey"},"author": {
                 "@type": "Person",
@@ -75,10 +75,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">Docker Daemon 介绍</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>gaffey</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/docker/"><i class="far fa-folder fa-fw"></i>docker</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-07">2022-03-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1349 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;<span id="/posts/docker_daemon/" class="leancloud_visitors" data-flag-title="Docker Daemon 介绍">
+        </div><article class="page single"><h1 class="single-title animated flipInX">[笔记]《Unix网络编程卷一》第一章</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>gaffey</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>计算机网络</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-11">2022-03-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 554 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id="/posts/unpbook1/" class="leancloud_visitors" data-flag-title="[笔记]《Unix网络编程卷一》第一章">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -88,104 +88,58 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#docker-引擎">Docker 引擎</a></li>
-    <li><a href="#docker引擎详解">Docker引擎详解</a>
-      <ul>
-        <li><a href="#旧版-docker">旧版 Docker</a></li>
-        <li><a href="#摆脱-lxc">摆脱 LXC</a></li>
-        <li><a href="#摒弃大而全的-docker-daemon">摒弃大而全的 Docker daemon</a></li>
-      </ul>
-    </li>
-    <li><a href="#runc-和-containerd">runc 和 containerd</a></li>
-    <li><a href="#启动一个容器的流程">启动一个容器的流程</a></li>
-    <li><a href="#shim">shim</a></li>
+    <li><a href="#环境搭建">环境搭建</a></li>
+    <li><a href="#osi-模型">OSI 模型</a></li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="docker-deamon-介绍">Docker Deamon 介绍</h1>
-<blockquote>
-<p>摘抄自《深入浅出docker》</p>
-</blockquote>
-<h2 id="docker-引擎">Docker 引擎</h2>
-<p>Docker 引擎是用来运行和管理容器的核心软件。
-基于开放容器计划OCI相关标准，Docker引擎采用了模块化的设计原则，其组件是可替换的。
-<img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://ypy.7bao.fun/img/20220305114844.png"
-        data-srcset="https://ypy.7bao.fun/img/20220305114844.png, https://ypy.7bao.fun/img/20220305114844.png 1.5x, https://ypy.7bao.fun/img/20220305114844.png 2x"
-        data-sizes="auto"
-        alt="https://ypy.7bao.fun/img/20220305114844.png"
-        title="https://ypy.7bao.fun/img/20220305114844.png" /></p>
-<h2 id="docker引擎详解">Docker引擎详解</h2>
-<h3 id="旧版-docker">旧版 Docker</h3>
-<p>Docker 引擎首次发布的时候，由两个核心组件构成：LXC 和 Docker daemon</p>
-<ul>
-<li>Docker deamon 是一个单一的二进制文件，由 Docker Client 、Docker API、容器运行时、构建镜像等组成</li>
-<li>LXC 由命名空间 Namespace 和 控制组 CGroup 等基础工具组成，由 Linux 内核的容器虚拟化技术提供。
-<img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://ypy.7bao.fun/img/20220305115253.png"
-        data-srcset="https://ypy.7bao.fun/img/20220305115253.png, https://ypy.7bao.fun/img/20220305115253.png 1.5x, https://ypy.7bao.fun/img/20220305115253.png 2x"
-        data-sizes="auto"
-        alt="https://ypy.7bao.fun/img/20220305115253.png"
-        title="https://ypy.7bao.fun/img/20220305115253.png" /></li>
-</ul>
-<h3 id="摆脱-lxc">摆脱 LXC</h3>
-<p>LXC 是基于 Linux 的， 这对于跨平台来说是一个致命的问题，其次，如此核心的组件依赖外部提供，这会给项目带来巨大风险，甚至会影响项目的发展。
-因此 Docker 自研了 Libcontainer 代替 LXC，Libcontainer 与平台无关，可基于不同的内核为 Docker 上次提供必要的的容器交互能力。</p>
-<ul>
-<li>Docker 0.9 版本中，Libcontainer 已经取代 LXC 成为默认的执行驱动</li>
-</ul>
-<h3 id="摒弃大而全的-docker-daemon">摒弃大而全的 Docker daemon</h3>
-<p>随着时间的推移，Docker daemon 越来越大， 导致难于变更，运行越来越慢，于是准备拆解 Docker daemon 进程，使其模块化，并且这些子模块是可替换的，也可以被第三方使用。这一计划遵循了 Unix 中的软件设计哲学： 小而专的工具可以组装为大型工具。
-目前 Docker 引擎的架构图如图所示
-<img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://ypy.7bao.fun/img/20220305120022.png"
-        data-srcset="https://ypy.7bao.fun/img/20220305120022.png, https://ypy.7bao.fun/img/20220305120022.png 1.5x, https://ypy.7bao.fun/img/20220305120022.png 2x"
-        data-sizes="auto"
-        alt="https://ypy.7bao.fun/img/20220305120022.png"
-        title="https://ypy.7bao.fun/img/20220305120022.png" /></p>
-<h2 id="runc-和-containerd">runc 和 containerd</h2>
-<p>根据 OCI 容器运行时规范，针对 Libcontainer 进行包装了一个轻量级命令行工具 runc
-runc 只有一个作用，就是创建容器，所以它非常快</p>
-<p>containerd 的主要任务是容器的生命周期管理，start、stop、pause、rm 等
-containerd最初被设计为轻量级的小型工具，仅用于容器的生命周期管理。然而，随着时间的推移，它被赋予了更多的功能，比如镜像管理</p>
-<blockquote>
-<p>其原因之一在于，这样便于在其他项目中使用它。比如，在Kubernetes中，containerd就是一个很受欢迎的容器运行时。然而在Kubernetes这样的项目中，如果containerd能够完成一些诸如push和pull镜像这样的操作就更好了。因此，如今containerd还能够完成一些除容器生命周期管理之外的操作。不过，所有的额外功能都是模块化的、可选的，便于自行选择所需功能。所以，Kubernetes这样的项目在使用containerd时，可以仅包含所需的功能</p>
-</blockquote>
-<h2 id="启动一个容器的流程">启动一个容器的流程</h2>
-<pre tabindex="0"><code>$ docker run --name ctrl -it alpine:latest sh
-</code></pre><ol>
-<li>当使用 Docker 命令行工具执行如上命令时，Docker 客户端会将其转换为合适的 REST API 发送到 Docker deamon</li>
-<li>daemon 接受到创建新容器的请求，通过 gRPC 向 containerd 发起调用</li>
-<li>containerd 并不负责创建容器，containerd 将 Docker 镜像转换为 OCI bundle 然后让 runc 基于此创建一个新的容器</li>
-<li>runc 与操作系统API进行通信，基于 Namespace CGroup 等创建容器，容器进程作为 runc 的子进程启动，启动完毕后， runc 会退出
-<img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://ypy.7bao.fun/img/20220305121238.png"
-        data-srcset="https://ypy.7bao.fun/img/20220305121238.png, https://ypy.7bao.fun/img/20220305121238.png 1.5x, https://ypy.7bao.fun/img/20220305121238.png 2x"
-        data-sizes="auto"
-        alt="https://ypy.7bao.fun/img/20220305121238.png"
-        title="https://ypy.7bao.fun/img/20220305121238.png" /></li>
+            </div><div class="content" id="content"><h2 id="环境搭建">环境搭建</h2>
+<p>只考虑 Linux 环境的话</p>
+<ol>
+<li>获取源代码 <code>git clone https://github.com/unpbook/unpv13e.git</code></li>
+<li><code>cd unpv13e</code></li>
+<li><code>./configure</code></li>
+<li><code>cd lib</code></li>
+<li><code>make</code></li>
+<li><code>cd ../libfree</code></li>
+<li><code>make</code></li>
 </ol>
-<h2 id="shim">shim</h2>
-<p>图片中展示了 shim， 它是什么作用呢？
-shim 是实现无 daemon 的容器不可或缺的工具</p>
-<p>前面提到，containerd 指挥 runc来创建新容器。事实上，每次创建容器时它都会fork一个新的runc实例。不过，一旦容器创建完毕，对应的runc进程就会退出。因此，即使运行上百个容器，也无须保持上百个运行中的runc实例。</p>
-<p>一旦容器进程的父进程runc退出，相关联的containerd-shim进程就会成为容器的父进程。作为容器的父进程，shim的部分职责如下：</p>
-<ul>
-<li>保持所有STDIN和STDOUT流是开启状态，从而当daemon重启的时候，容器不会因为管道（pipe）的关闭而终止。</li>
-<li>将容器的退出状态反馈给daemon。</li>
-</ul>
+<p>验证环境是否成功</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> ../intro
+</span></span><span class="line"><span class="cl">make all
+</span></span><span class="line"><span class="cl">// 先在一个终端启动服务端
+</span></span><span class="line"><span class="cl">./daytimetcpsrv
+</span></span><span class="line"><span class="cl">// 另一个终端执行客户端，能正常返回当前时间
+</span></span><span class="line"><span class="cl">./daytimetcpcli 127.0.0.1
+</span></span><span class="line"><span class="cl">Fri Mar <span class="m">11</span> 22:44:07 <span class="m">2022</span>
+</span></span></code></pre></div><h2 id="osi-模型">OSI 模型</h2>
+<p>OSI 全称计算机通信开放互联系统（open systems interconnection），这是一个七层模型，非常经典</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ypy.7bao.fun/img/202203112248946.png"
+        data-srcset="https://ypy.7bao.fun/img/202203112248946.png, https://ypy.7bao.fun/img/202203112248946.png 1.5x, https://ypy.7bao.fun/img/202203112248946.png 2x"
+        data-sizes="auto"
+        alt="https://ypy.7bao.fun/img/202203112248946.png"
+        title="https://ypy.7bao.fun/img/202203112248946.png" /></p>
+<p>其中最底下两层是硬件提供，通常情况下只需要记住 MTU 是 1500 字节就够了，中间这幅图，TCP 和 UPD 之间有一个空隙，表明了上层的网络应用绕过传输层直接使用 IPv4 和 IPv6 协议是有可能的，比如<em><strong>原始套接字（raw socket）</strong></em></p>
+<p>OSI 最上面的三层可以合并成应用层，就是 web 客户端、 web 服务器、FTP 服务器以及绝大多数使用网络的应用所在层</p>
+<p>最右边这幅图，区分了用户进程和内核的分界，TCP、UDP 和他的下层是由内核提供，应用程序不需要处理相关通信细节：例如发送数据，等待确认，给无序数据排序，计算校验和等，内核提供 socket api 让用户程序访问</p>
+<h2 id="总结">总结</h2>
+<p>整个第一章开头讲了 c 语言写的 tcp 时间服务器和客户端的例子，这个没什么说的，代码直接在源码里看就行，难的就是 c 语言一些网络库的函数不会用，死记硬背不行，只有边学边看文档了，然后了解 OSI 七层模型都是干嘛的，但是重点只用关注传输层和网络层即可，因为我们需要在这两层上面构建网络应用，最后就是网络 debug 能力，简单介绍了 netstat 、ifconfig 命令，能看懂网络拓扑图</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ypy.7bao.fun/img/202203112310042.png"
+        data-srcset="https://ypy.7bao.fun/img/202203112310042.png, https://ypy.7bao.fun/img/202203112310042.png 1.5x, https://ypy.7bao.fun/img/202203112310042.png 2x"
+        data-sizes="auto"
+        alt="https://ypy.7bao.fun/img/202203112310042.png"
+        title="https://ypy.7bao.fun/img/202203112310042.png" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2022-03-07</span>
+                <span>更新于 2022-03-11</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -198,14 +152,13 @@ shim 是实现无 daemon 的容器不可或缺的工具</p>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">docker</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tcp/ip/">TCP/IP</a>,&nbsp;<a href="/tags/network/">network</a>,&nbsp;<a href="/tags/socket/">socket</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/first_post/" class="prev" rel="prev" title="fisrt_post"><i class="fas fa-angle-left fa-fw"></i>fisrt_post</a>
-            <a href="/posts/client-go/" class="next" rel="next" title="client-go 简单介绍和使用">client-go 简单介绍和使用<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/client-go/" class="prev" rel="prev" title="client-go 简单介绍和使用"><i class="fas fa-angle-left fa-fw"></i>client-go 简单介绍和使用</a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

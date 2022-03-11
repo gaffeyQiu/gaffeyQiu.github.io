@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>计算机网络 - 分类 - 开发笔记</title>
+        <link>https://blog.7bao.fun/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+        <description>计算机网络 - 分类 - 开发笔记</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 11 Mar 2022 23:14:18 &#43;0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+    <title>[笔记]《Unix网络编程卷一》第一章</title>
+    <link>https://blog.7bao.fun/posts/unpbook1/</link>
+    <pubDate>Fri, 11 Mar 2022 23:14:18 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.7bao.fun/posts/unpbook1/</guid>
+    <description><![CDATA[环境搭建 只考虑 Linux 环境的话 获取源代码 git clone https://github.com/unpbook/unpv13e.git cd unpv13e ./configure cd lib make cd ../libfree make 验证环境是否成功 cd ../intro make all // 先在一个终端启动服务端 ./daytimetcpsrv // 另一个终端执行客户端，能正常返]]></description>
+</item></channel>
+</rss>
