@@ -5,30 +5,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>[笔记]《Unix网络编程卷一》第一章 - 开发笔记</title><meta name="Description" content=""><meta property="og:title" content="[笔记]《Unix网络编程卷一》第一章" />
-<meta property="og:description" content="环境搭建 只考虑 Linux 环境的话 获取源代码 git clone https://github.com/unpbook/unpv13e.git cd unpv13e ./configure cd lib make cd ../libfree make 验证环境是否成功 cd ../intro make all // 先在一个终端启动服务端 ./daytimetcpsrv // 另一个终端执行客户端，能正常返" />
+        <title>[笔记]《Unix网络编程卷一》第二章 - 开发笔记</title><meta name="Description" content=""><meta property="og:title" content="[笔记]《Unix网络编程卷一》第二章" />
+<meta property="og:description" content="总图 虽然协议族被称为 TCP/IP ，但除了 TCP/IP 这个两个协议之外还有许多其他成员，如图所示 UDP 用户数据报协议 UDP 是一个简单的传输层协议，应用进程往一个 UDP 套接字写" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.7bao.fun/posts/unpbook1/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-03-11T23:14:18+08:00" />
-<meta property="article:modified_time" content="2022-03-11T23:14:18+08:00" />
+<meta property="og:url" content="https://blog.7bao.fun/posts/unpbook2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-12T21:05:30+08:00" />
+<meta property="article:modified_time" content="2022-03-12T21:05:30+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[笔记]《Unix网络编程卷一》第一章"/>
-<meta name="twitter:description" content="环境搭建 只考虑 Linux 环境的话 获取源代码 git clone https://github.com/unpbook/unpv13e.git cd unpv13e ./configure cd lib make cd ../libfree make 验证环境是否成功 cd ../intro make all // 先在一个终端启动服务端 ./daytimetcpsrv // 另一个终端执行客户端，能正常返"/>
+<meta name="twitter:title" content="[笔记]《Unix网络编程卷一》第二章"/>
+<meta name="twitter:description" content="总图 虽然协议族被称为 TCP/IP ，但除了 TCP/IP 这个两个协议之外还有许多其他成员，如图所示 UDP 用户数据报协议 UDP 是一个简单的传输层协议，应用进程往一个 UDP 套接字写"/>
 <meta name="application-name" content="开发笔记">
 <meta name="apple-mobile-web-app-title" content="开发笔记"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.7bao.fun/posts/unpbook1/" /><link rel="prev" href="https://blog.7bao.fun/posts/client-go/" /><link rel="next" href="https://blog.7bao.fun/posts/unpbook2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.7bao.fun/posts/unpbook2/" /><link rel="prev" href="https://blog.7bao.fun/posts/unpbook1/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "[笔记]《Unix网络编程卷一》第一章",
+        "headline": "[笔记]《Unix网络编程卷一》第二章",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/blog.7bao.fun\/posts\/unpbook1\/"
-        },"genre": "posts","keywords": "TCP\/IP, network, socket","wordcount":  554 ,
-        "url": "https:\/\/blog.7bao.fun\/posts\/unpbook1\/","datePublished": "2022-03-11T23:14:18+08:00","dateModified": "2022-03-11T23:14:18+08:00","publisher": {
+            "@id": "https:\/\/blog.7bao.fun\/posts\/unpbook2\/"
+        },"genre": "posts","keywords": "TCP\/IP, network, socket","wordcount":  1769 ,
+        "url": "https:\/\/blog.7bao.fun\/posts\/unpbook2\/","datePublished": "2022-03-12T21:05:30+08:00","dateModified": "2022-03-12T21:05:30+08:00","publisher": {
             "@type": "Organization",
             "name": "gaffey"},"author": {
                 "@type": "Person",
@@ -75,10 +75,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">[笔记]《Unix网络编程卷一》第一章</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">[笔记]《Unix网络编程卷一》第二章</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>gaffey</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>计算机网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-11">2022-03-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 554 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id="/posts/unpbook1/" class="leancloud_visitors" data-flag-title="[笔记]《Unix网络编程卷一》第一章">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-12">2022-03-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1769 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;<span id="/posts/unpbook2/" class="leancloud_visitors" data-flag-title="[笔记]《Unix网络编程卷一》第二章">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -88,58 +88,106 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#环境搭建">环境搭建</a></li>
-    <li><a href="#osi-模型">OSI 模型</a></li>
-    <li><a href="#总结">总结</a></li>
+    <li><a href="#总图">总图</a></li>
+    <li><a href="#udp-用户数据报协议">UDP 用户数据报协议</a></li>
+    <li><a href="#tcp-传输控制协议">TCP 传输控制协议</a>
+      <ul>
+        <li><a href="#tcp-三次握手">TCP 三次握手</a></li>
+        <li><a href="#tcp-四次挥手">TCP 四次挥手</a></li>
+        <li><a href="#tcp状态转换图">TCP状态转换图</a></li>
+        <li><a href="#time_wait">TIME_WAIT</a></li>
+      </ul>
+    </li>
+    <li><a href="#sctp-流控制传输协议">SCTP 流控制传输协议</a></li>
+    <li><a href="#端口号">端口号</a></li>
+    <li><a href="#小结">小结</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="环境搭建">环境搭建</h2>
-<p>只考虑 Linux 环境的话</p>
+            </div><div class="content" id="content"><h2 id="总图">总图</h2>
+<p>虽然协议族被称为 TCP/IP ，但除了 TCP/IP 这个两个协议之外还有许多其他成员，如图所示</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ypy.7bao.fun/img/202203122107606.png"
+        data-srcset="https://ypy.7bao.fun/img/202203122107606.png, https://ypy.7bao.fun/img/202203122107606.png 1.5x, https://ypy.7bao.fun/img/202203122107606.png 2x"
+        data-sizes="auto"
+        alt="https://ypy.7bao.fun/img/202203122107606.png"
+        title="https://ypy.7bao.fun/img/202203122107606.png" /></p>
+<h2 id="udp-用户数据报协议">UDP 用户数据报协议</h2>
+<p>UDP 是一个简单的传输层协议，应用进程往一个 UDP 套接字写入一个消息，该消息随后被封装到一个 UDP 数据报，该数据报又被封装到一个 IP 数据报，然后发送到目的地，但是 UDP 不保证最终能到达目的地，也不保证各个数据报的顺序，也不保证一个数据报只到达一次，如果你想要一个 UDP 数据报可靠的传输，就需要往应用程序中自己添加这些特性。</p>
+<p>当然 UDP 也有好处，UDP的数据有准确的边界，也不用和对端先建立连接，一个 UDP 客户端可以创建一个套接字发送一个数据报给服务器A，然后用同一个套接字发送给服务器B，同样的，服务器可以用一个 UDP 套接字从若干个不同的客户端接收数据报。</p>
+<h2 id="tcp-传输控制协议">TCP 传输控制协议</h2>
+<p>TCP 被设计成一个可靠的传输协议， 为了保证可靠，TCP 首先要求客户端和服务端先建立连接，数据交换完毕之后，再关闭连接，在这个基础之上，TCP 提供了确认机制，重传机制， 给每个包添加序号提供排序能力，通过动态预估客户端和服务端往返时间（RTT） 判断当前网络环境是否拥堵提供流量控制等等一系列功能，这些都是不需要应用程序关心的（可能唯一需要处理的就是消息边界问题，俗称TCP粘包和拆包）</p>
+<blockquote>
+<p>TCP 不能说成是 100% 可靠的协议，因为这是不可能做到的， TCP 的可靠性是数据的可靠传递或故障的可靠通知</p>
+</blockquote>
+<h3 id="tcp-三次握手">TCP 三次握手</h3>
+<p>建立一个 TCP 连接时会发生下述情形，前提是服务器必须准备好接受外来的连接。通常调用 <code>socket</code>、<code>bind</code> 和 <code>listen</code> 三个函数来完成，称作被动打开</p>
 <ol>
-<li>获取源代码 <code>git clone https://github.com/unpbook/unpv13e.git</code></li>
-<li><code>cd unpv13e</code></li>
-<li><code>./configure</code></li>
-<li><code>cd lib</code></li>
-<li><code>make</code></li>
-<li><code>cd ../libfree</code></li>
-<li><code>make</code></li>
+<li>客户端通过调用 <code>connect</code> 发起主动打开，会导致客户TCP发送一个 SYN 分节，它告诉服务器客户端将在连接中发送的数据的初始序列号。</li>
+<li>服务器必须确认（ACK）客户端的 SYN， 同时自己也得发送一个 SYN 分节，它含有服务器将在同一连接中发送数据的初始序列号。</li>
+<li>客户端你必须确认服务器的SYN</li>
 </ol>
-<p>验证环境是否成功</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> ../intro
-</span></span><span class="line"><span class="cl">make all
-</span></span><span class="line"><span class="cl">// 先在一个终端启动服务端
-</span></span><span class="line"><span class="cl">./daytimetcpsrv
-</span></span><span class="line"><span class="cl">// 另一个终端执行客户端，能正常返回当前时间
-</span></span><span class="line"><span class="cl">./daytimetcpcli 127.0.0.1
-</span></span><span class="line"><span class="cl">Fri Mar <span class="m">11</span> 22:44:07 <span class="m">2022</span>
-</span></span></code></pre></div><h2 id="osi-模型">OSI 模型</h2>
-<p>OSI 全称计算机通信开放互联系统（open systems interconnection），这是一个七层模型，非常经典</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://ypy.7bao.fun/img/202203112248946.png"
-        data-srcset="https://ypy.7bao.fun/img/202203112248946.png, https://ypy.7bao.fun/img/202203112248946.png 1.5x, https://ypy.7bao.fun/img/202203112248946.png 2x"
+        data-src="https://ypy.7bao.fun/img/202203122206972.png"
+        data-srcset="https://ypy.7bao.fun/img/202203122206972.png, https://ypy.7bao.fun/img/202203122206972.png 1.5x, https://ypy.7bao.fun/img/202203122206972.png 2x"
         data-sizes="auto"
-        alt="https://ypy.7bao.fun/img/202203112248946.png"
-        title="https://ypy.7bao.fun/img/202203112248946.png" /></p>
-<p>其中最底下两层是硬件提供，通常情况下只需要记住 MTU 是 1500 字节就够了，中间这幅图，TCP 和 UPD 之间有一个空隙，表明了上层的网络应用绕过传输层直接使用 IPv4 和 IPv6 协议是有可能的，比如<em><strong>原始套接字（raw socket）</strong></em></p>
-<p>OSI 最上面的三层可以合并成应用层，就是 web 客户端、 web 服务器、FTP 服务器以及绝大多数使用网络的应用所在层</p>
-<p>最右边这幅图，区分了用户进程和内核的分界，TCP、UDP 和他的下层是由内核提供，应用程序不需要处理相关通信细节：例如发送数据，等待确认，给无序数据排序，计算校验和等，内核提供 socket api 让用户程序访问</p>
-<h2 id="总结">总结</h2>
-<p>整个第一章开头讲了 c 语言写的 tcp 时间服务器和客户端的例子，这个没什么说的，代码直接在源码里看就行，难的就是 c 语言一些网络库的函数不会用，死记硬背不行，只有边学边看文档了，然后了解 OSI 七层模型都是干嘛的，但是重点只用关注传输层和网络层即可，因为我们需要在这两层上面构建网络应用，最后就是网络 debug 能力，简单介绍了 netstat 、ifconfig 命令，能看懂网络拓扑图</p>
+        alt="https://ypy.7bao.fun/img/202203122206972.png"
+        title="https://ypy.7bao.fun/img/202203122206972.png" /></p>
+<h3 id="tcp-四次挥手">TCP 四次挥手</h3>
+<p>终止一个TCP连接需要4个过程</p>
+<ol>
+<li>某个应用进程调用 <code>close</code> （主动关闭），该端的TCP发送一个 FIN 分节，表示数据已发送完毕</li>
+<li>接收到这个 FIN 的端执行被动关闭，这个FIN由 TCP 回复一个 ACK，同时将一个文件结束符<code>EOF</code> 放到缓冲区等待应用程序读取</li>
+<li>一段时间后，这一端的应用程序读到 <code>EOF</code> ，由应用程序调用 <code>close</code>关闭套接字，这导致这一端的 TCP 也会发送一个 FIN</li>
+<li>接收到这个最终的 FIN，然后回复一个 ACK 给对端</li>
+</ol>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://ypy.7bao.fun/img/202203112310042.png"
-        data-srcset="https://ypy.7bao.fun/img/202203112310042.png, https://ypy.7bao.fun/img/202203112310042.png 1.5x, https://ypy.7bao.fun/img/202203112310042.png 2x"
+        data-src="https://ypy.7bao.fun/img/202203122214019.png"
+        data-srcset="https://ypy.7bao.fun/img/202203122214019.png, https://ypy.7bao.fun/img/202203122214019.png 1.5x, https://ypy.7bao.fun/img/202203122214019.png 2x"
         data-sizes="auto"
-        alt="https://ypy.7bao.fun/img/202203112310042.png"
-        title="https://ypy.7bao.fun/img/202203112310042.png" /></p>
+        alt="https://ypy.7bao.fun/img/202203122214019.png"
+        title="https://ypy.7bao.fun/img/202203122214019.png" /></p>
+<blockquote>
+<p>通常来说4次挥手不代表是4次传输，因为有可能步骤一的 FIN 会随着数据一起发送，而步骤2和3 也有可能合并成一次传输</p>
+</blockquote>
+<p>不管是主动关闭放还是被动关闭方，都不需要一定调用 <code>close</code> 方法才能触发，当进程退出，它所打开的描述符都会被关闭。</p>
+<h3 id="tcp状态转换图">TCP状态转换图</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ypy.7bao.fun/img/202203122219652.png"
+        data-srcset="https://ypy.7bao.fun/img/202203122219652.png, https://ypy.7bao.fun/img/202203122219652.png 1.5x, https://ypy.7bao.fun/img/202203122219652.png 2x"
+        data-sizes="auto"
+        alt="https://ypy.7bao.fun/img/202203122219652.png"
+        title="https://ypy.7bao.fun/img/202203122219652.png" /></p>
+<h3 id="time_wait">TIME_WAIT</h3>
+<p>主动关闭连接的一方会经历 TIME_WAIT 状态，这个状态的持续时间是 2MSL</p>
+<p>主要原因有两个：</p>
+<ol>
+<li>让老的重复消息在网络中消失：假设最终的ACK在网络中丢失了，服务器将重新发送 FIN，如果没有 TIME_WAIT 状态，可能这个重发消息就接收不到。这也是为什么主动关闭一方需要进入 TIME_WAIT 状态。</li>
+<li>可靠的终止连接： 假设在 1.0.0.1:1500 端口和 1.0.0.2:21 端口之间有一条TCP连接，我们关闭这个连接，过一段时间之后，在相同的IP和端口建立了连接，但是网络中还有上一次重发的的 FIN 消息，可能会重新回到这条连接上被应用程序接受到，误以为这条新建立的连接需要关闭，然后开始走关闭流程。</li>
+</ol>
+<h2 id="sctp-流控制传输协议">SCTP 流控制传输协议</h2>
+<p>SCTP 结合了 UDP 和 TCP 的优点，提供可靠性、排序、流量控制以及双全工的数据传送，也能记录每条消息的边界，不同的是，一个 SCTP 支持多个 IP 地址，能够在所连接的端点之间提供多个流，每个流各自可靠的按序递送消息。</p>
+<h2 id="端口号">端口号</h2>
+<p>不管是建立什么连接，都需要 IP 和 端口号，其中这些协议都使用 16 位整数的端口号来区分进程，但是端口号不能随意分配给应用进程， IANA 维护着一份端口号分配清单</p>
+<ol>
+<li>0～1023 由 IANA 分配和控制，例如 web 服务器不管 TCP 还是 UDP 都是 80 端口</li>
+<li>已登记的端口 1024～49151，这些端口不受 IANA 控制，可以安排给你的服务端程序使用</li>
+<li>49152～65535 是动态或者私用端口， IANA 不管这些端口，比如我们浏览网页，需要和web服务器建立一个 TCP 连接，这里我们浏览器会在这个 区间随机使用一个没被占用的端口创建套接字</li>
+</ol>
+<h2 id="小结">小结</h2>
+<p>本章讲解了 TCP UDP 和 SCTP 的概念，主要需要掌握 TCP 的三次握手和四次挥手，概念性的东西也比较多，有一个并发服务器的例子，讲的是服务端每接收到一个连接，会 fork 出一个子进程来处理，当数据过来的时候， 主进程会根据[源ip，源端口，目的地ip，目的地端口] 这样的四元组来决定数据是给哪个子进程的。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2022-03-11</span>
+                <span>更新于 2022-03-12</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -158,8 +206,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/client-go/" class="prev" rel="prev" title="client-go 简单介绍和使用"><i class="fas fa-angle-left fa-fw"></i>client-go 简单介绍和使用</a>
-            <a href="/posts/unpbook2/" class="next" rel="next" title="[笔记]《Unix网络编程卷一》第二章">[笔记]《Unix网络编程卷一》第二章<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/unpbook1/" class="prev" rel="prev" title="[笔记]《Unix网络编程卷一》第一章"><i class="fas fa-angle-left fa-fw"></i>[笔记]《Unix网络编程卷一》第一章</a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

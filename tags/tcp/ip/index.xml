@@ -4,6 +4,13 @@
         <link>https://blog.7bao.fun/tags/tcp/ip/</link>
         <description>TCP/IP - 标签 - 开发笔记</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="https://blog.7bao.fun/tags/tcp/ip/" rel="self" type="application/rss+xml" /><item>
+    <title>[笔记]《Unix网络编程卷一》第二章</title>
+    <link>https://blog.7bao.fun/posts/unpbook2/</link>
+    <pubDate>Sat, 12 Mar 2022 21:05:30 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.7bao.fun/posts/unpbook2/</guid>
+    <description><![CDATA[总图 虽然协议族被称为 TCP/IP ，但除了 TCP/IP 这个两个协议之外还有许多其他成员，如图所示 UDP 用户数据报协议 UDP 是一个简单的传输层协议，应用进程往一个 UDP 套接字写]]></description>
+</item><item>
     <title>[笔记]《Unix网络编程卷一》第一章</title>
     <link>https://blog.7bao.fun/posts/unpbook1/</link>
     <pubDate>Fri, 11 Mar 2022 23:14:18 &#43;0800</pubDate>
