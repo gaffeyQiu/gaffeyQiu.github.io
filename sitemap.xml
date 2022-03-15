@@ -2,19 +2,20 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://blog.7bao.fun/categories/</loc><lastmod>2022-03-15T16:12:51&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/tags/client-go/</loc><lastmod>2022-03-15T16:12:51&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/tags/kubernetes/</loc><lastmod>2022-03-15T16:12:51&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/categories/kubernetes/</loc><lastmod>2022-03-15T16:12:51&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/posts/</loc><lastmod>2022-03-15T16:12:51&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/tags/</loc><lastmod>2022-03-15T16:12:51&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/posts/add-apiserver-to-crd-controller/</loc><lastmod>2022-03-15T16:12:51&#43;08:00</lastmod></url><url>
+            <loc>https://blog.7bao.fun/</loc><lastmod>2022-03-15T16:12:51&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/posts/unpbook2/</loc><lastmod>2022-03-12T21:05:30&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/categories/</loc><lastmod>2022-03-12T21:05:30&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/tags/network/</loc><lastmod>2022-03-12T21:05:30&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/posts/</loc><lastmod>2022-03-12T21:05:30&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/tags/socket/</loc><lastmod>2022-03-12T21:05:30&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/tags/</loc><lastmod>2022-03-12T21:05:30&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/</loc><lastmod>2022-03-12T21:05:30&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc><lastmod>2022-03-12T21:05:30&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/posts/unpbook1/</loc><lastmod>2022-03-11T23:14:18&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/tags/client-go/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/posts/client-go/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/tags/kubernetes/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
-            <loc>https://blog.7bao.fun/categories/kubernetes/</loc><lastmod>2022-03-08T20:13:25&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/tags/docker/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/categories/docker/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>
             <loc>https://blog.7bao.fun/posts/docker_daemon/</loc><lastmod>2022-03-07T20:28:10&#43;08:00</lastmod></url><url>

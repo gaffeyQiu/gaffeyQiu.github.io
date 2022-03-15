@@ -3,9 +3,16 @@
         <title>开发笔记</title>
         <link>https://blog.7bao.fun/</link>
         <description>开发笔记</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 12 Mar 2022 21:05:30 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 15 Mar 2022 16:12:51 &#43;0800</lastBuildDate>
             <atom:link href="https://blog.7bao.fun/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>为 crd controller 添加 apiserver</title>
+    <link>https://blog.7bao.fun/posts/add-apiserver-to-crd-controller/</link>
+    <pubDate>Tue, 15 Mar 2022 16:12:51 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.7bao.fun/posts/add-apiserver-to-crd-controller/</guid>
+    <description><![CDATA[crd operator 众所周之， kubernetes 除了 pod，deployment， service 这类内置资源之外，还能额外为业务自定义资源，也就构成了 云原生（Cloud Native） 这]]></description>
+</item><item>
     <title>[笔记]《Unix网络编程卷一》第二章</title>
     <link>https://blog.7bao.fun/posts/unpbook2/</link>
     <pubDate>Sat, 12 Mar 2022 21:05:30 &#43;0800</pubDate>
