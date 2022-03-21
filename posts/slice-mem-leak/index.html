@@ -5,30 +5,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>[笔记]《Unix网络编程卷一》第一章 - 开发笔记</title><meta name="Description" content=""><meta property="og:title" content="[笔记]《Unix网络编程卷一》第一章" />
-<meta property="og:description" content="环境搭建 只考虑 Linux 环境的话 获取源代码 git clone https://github.com/unpbook/unpv13e.git cd unpv13e ./configure cd lib make cd ../libfree make 验证环境是否成功 cd ../intro make all // 先在一个终端启动服务端 ./daytimetcpsrv // 另一个终端执行客户端，能正常返" />
+        <title>关于 go 语言中切片泄漏的例子 - 开发笔记</title><meta name="Description" content=""><meta property="og:title" content="关于 go 语言中切片泄漏的例子" />
+<meta property="og:description" content="Slice 使用误区 假设我们业务代码中用一个切片临时接收一个大数据，同时经过逻辑处理后使用 [m:n] 语法取出大切片的前10条数据供我们后续使用， 那么这个临时的" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.7bao.fun/posts/unpbook1/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-03-11T23:14:18+08:00" />
-<meta property="article:modified_time" content="2022-03-11T23:14:18+08:00" />
+<meta property="og:url" content="https://blog.7bao.fun/posts/slice-mem-leak/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-21T18:48:25+08:00" />
+<meta property="article:modified_time" content="2022-03-21T18:48:25+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[笔记]《Unix网络编程卷一》第一章"/>
-<meta name="twitter:description" content="环境搭建 只考虑 Linux 环境的话 获取源代码 git clone https://github.com/unpbook/unpv13e.git cd unpv13e ./configure cd lib make cd ../libfree make 验证环境是否成功 cd ../intro make all // 先在一个终端启动服务端 ./daytimetcpsrv // 另一个终端执行客户端，能正常返"/>
+<meta name="twitter:title" content="关于 go 语言中切片泄漏的例子"/>
+<meta name="twitter:description" content="Slice 使用误区 假设我们业务代码中用一个切片临时接收一个大数据，同时经过逻辑处理后使用 [m:n] 语法取出大切片的前10条数据供我们后续使用， 那么这个临时的"/>
 <meta name="application-name" content="开发笔记">
 <meta name="apple-mobile-web-app-title" content="开发笔记"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.7bao.fun/posts/unpbook1/" /><link rel="prev" href="https://blog.7bao.fun/posts/client-go/" /><link rel="next" href="https://blog.7bao.fun/posts/unpbook2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.7bao.fun/posts/slice-mem-leak/" /><link rel="prev" href="https://blog.7bao.fun/posts/unpbook3/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "[笔记]《Unix网络编程卷一》第一章",
+        "headline": "关于 go 语言中切片泄漏的例子",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/blog.7bao.fun\/posts\/unpbook1\/"
-        },"genre": "posts","keywords": "TCP\/IP, network, socket","wordcount":  554 ,
-        "url": "https:\/\/blog.7bao.fun\/posts\/unpbook1\/","datePublished": "2022-03-11T23:14:18+08:00","dateModified": "2022-03-11T23:14:18+08:00","publisher": {
+            "@id": "https:\/\/blog.7bao.fun\/posts\/slice-mem-leak\/"
+        },"genre": "posts","keywords": "go, slice","wordcount":  368 ,
+        "url": "https:\/\/blog.7bao.fun\/posts\/slice-mem-leak\/","datePublished": "2022-03-21T18:48:25+08:00","dateModified": "2022-03-21T18:48:25+08:00","publisher": {
             "@type": "Organization",
             "name": "gaffey"},"author": {
                 "@type": "Person",
@@ -75,10 +75,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">[笔记]《Unix网络编程卷一》第一章</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>gaffey</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>计算机网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-11">2022-03-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 554 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id="/posts/unpbook1/" class="leancloud_visitors" data-flag-title="[笔记]《Unix网络编程卷一》第一章">
+        </div><article class="page single"><h1 class="single-title animated flipInX">关于 go 语言中切片泄漏的例子</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>gaffey</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/go/"><i class="far fa-folder fa-fw"></i>go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-21">2022-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 368 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;<span id="/posts/slice-mem-leak/" class="leancloud_visitors" data-flag-title="关于 go 语言中切片泄漏的例子">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -86,60 +86,79 @@
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#环境搭建">环境搭建</a></li>
-    <li><a href="#osi-模型">OSI 模型</a></li>
-    <li><a href="#总结">总结</a></li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><h2 id="环境搭建">环境搭建</h2>
-<p>只考虑 Linux 环境的话</p>
-<ol>
-<li>获取源代码 <code>git clone https://github.com/unpbook/unpv13e.git</code></li>
-<li><code>cd unpv13e</code></li>
-<li><code>./configure</code></li>
-<li><code>cd lib</code></li>
-<li><code>make</code></li>
-<li><code>cd ../libfree</code></li>
-<li><code>make</code></li>
-</ol>
-<p>验证环境是否成功</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> ../intro
-</span></span><span class="line"><span class="cl">make all
-</span></span><span class="line"><span class="cl">// 先在一个终端启动服务端
-</span></span><span class="line"><span class="cl">./daytimetcpsrv
-</span></span><span class="line"><span class="cl">// 另一个终端执行客户端，能正常返回当前时间
-</span></span><span class="line"><span class="cl">./daytimetcpcli 127.0.0.1
-</span></span><span class="line"><span class="cl">Fri Mar <span class="m">11</span> 22:44:07 <span class="m">2022</span>
-</span></span></code></pre></div><h2 id="osi-模型">OSI 模型</h2>
-<p>OSI 全称计算机通信开放互联系统（open systems interconnection），这是一个七层模型，非常经典</p>
-<p><img
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><h1 id="slice-使用误区">Slice 使用误区</h1>
+<p>假设我们业务代码中用一个切片临时接收一个大数据，同时经过逻辑处理后使用 <code>[m:n]</code>  语法取出大切片的前10条数据供我们后续使用， 那么这个临时的大切片会被 GC 回收掉吗？<br>
+示例代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;runtime&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">BIG_SLICE_LENGTH</span>   <span class="p">=</span> <span class="mi">10000000</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">SMALL_SLICE_LENGTH</span> <span class="p">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">createBigSlice</span><span class="p">()</span> <span class="p">[]</span><span class="kt">int32</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">bigSlice</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int32</span><span class="p">,</span> <span class="nx">BIG_SLICE_LENGTH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nx">BIG_SLICE_LENGTH</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">bigSlice</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nb">int32</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;big slice length %d, cap %d\n&#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">bigSlice</span><span class="p">),</span> <span class="nb">cap</span><span class="p">(</span><span class="nx">bigSlice</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">bigSlice</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">createSmallFromBig</span><span class="p">()</span> <span class="p">[]</span><span class="kt">int32</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">bigSlice</span> <span class="o">:=</span> <span class="nf">createBigSlice</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">smallSlice</span> <span class="o">:=</span> <span class="nx">bigSlice</span><span class="p">[:</span><span class="nx">SMALL_SLICE_LENGTH</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">smallSlice</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">small</span> <span class="o">:=</span> <span class="nf">createSmallFromBig</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">runtime</span><span class="p">.</span><span class="nf">GC</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;big slice length %d, cap %d\n&#34;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">small</span><span class="p">),</span> <span class="nb">cap</span><span class="p">(</span><span class="nx">small</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>输出结果是</p>
+<pre tabindex="0"><code>big slice length 10000000, cap 10000000
+big slice length 10, cap 10000000
+</code></pre><p>可以看到，我们在函数内部临时创建的大切片，依然在主动 GC 之后，还存在。<br>
+借助 debug 工具验证一下<br>
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://ypy.7bao.fun/img/202203112248946.png"
-        data-srcset="https://ypy.7bao.fun/img/202203112248946.png, https://ypy.7bao.fun/img/202203112248946.png 1.5x, https://ypy.7bao.fun/img/202203112248946.png 2x"
+        data-src="https://ypy.7bao.fun/img/202203211854882.png"
+        data-srcset="https://ypy.7bao.fun/img/202203211854882.png, https://ypy.7bao.fun/img/202203211854882.png 1.5x, https://ypy.7bao.fun/img/202203211854882.png 2x"
         data-sizes="auto"
-        alt="https://ypy.7bao.fun/img/202203112248946.png"
-        title="https://ypy.7bao.fun/img/202203112248946.png" /></p>
-<p>其中最底下两层是硬件提供，通常情况下只需要记住 MTU 是 1500 字节就够了，中间这幅图，TCP 和 UPD 之间有一个空隙，表明了上层的网络应用绕过传输层直接使用 IPv4 和 IPv6 协议是有可能的，比如<em><strong>原始套接字（raw socket）</strong></em></p>
-<p>OSI 最上面的三层可以合并成应用层，就是 web 客户端、 web 服务器、FTP 服务器以及绝大多数使用网络的应用所在层</p>
-<p>最右边这幅图，区分了用户进程和内核的分界，TCP、UDP 和他的下层是由内核提供，应用程序不需要处理相关通信细节：例如发送数据，等待确认，给无序数据排序，计算校验和等，内核提供 socket api 让用户程序访问</p>
-<h2 id="总结">总结</h2>
-<p>整个第一章开头讲了 c 语言写的 tcp 时间服务器和客户端的例子，这个没什么说的，代码直接在源码里看就行，难的就是 c 语言一些网络库的函数不会用，死记硬背不行，只有边学边看文档了，然后了解 OSI 七层模型都是干嘛的，但是重点只用关注传输层和网络层即可，因为我们需要在这两层上面构建网络应用，最后就是网络 debug 能力，简单介绍了 netstat 、ifconfig 命令，能看懂网络拓扑图</p>
-<p><img
+        alt="https://ypy.7bao.fun/img/202203211854882.png"
+        title="https://ypy.7bao.fun/img/202203211854882.png" /><br>
+首先可以看到我们确实取出了大切片的前10条数据，但是 cap 字段显示了，我们这个小切片的底层数组依然是旧的。
+我们来验证一下，首先找到下标9的数据地址<br>
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://ypy.7bao.fun/img/202203112310042.png"
-        data-srcset="https://ypy.7bao.fun/img/202203112310042.png, https://ypy.7bao.fun/img/202203112310042.png 1.5x, https://ypy.7bao.fun/img/202203112310042.png 2x"
+        data-src="https://ypy.7bao.fun/img/202203211859285.png"
+        data-srcset="https://ypy.7bao.fun/img/202203211859285.png, https://ypy.7bao.fun/img/202203211859285.png 1.5x, https://ypy.7bao.fun/img/202203211859285.png 2x"
         data-sizes="auto"
-        alt="https://ypy.7bao.fun/img/202203112310042.png"
-        title="https://ypy.7bao.fun/img/202203112310042.png" /></p>
+        alt="https://ypy.7bao.fun/img/202203211859285.png"
+        title="https://ypy.7bao.fun/img/202203211859285.png" /><br>
+然后在这个地址的基础上+4看看（一个int32占4字节）
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://ypy.7bao.fun/img/202203211900341.png"
+        data-srcset="https://ypy.7bao.fun/img/202203211900341.png, https://ypy.7bao.fun/img/202203211900341.png 1.5x, https://ypy.7bao.fun/img/202203211900341.png 2x"
+        data-sizes="auto"
+        alt="https://ypy.7bao.fun/img/202203211900341.png"
+        title="https://ypy.7bao.fun/img/202203211900341.png" /><br>
+我们依然取出了大数组的下标10的数据<br>
+所以，以后如果用 <code>[m:n]</code> 方法复用切片的时候要注意内存泄漏的问题。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2022-03-11</span>
+                <span>更新于 2022-03-21</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -152,14 +171,13 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tcp/ip/">TCP/IP</a>,&nbsp;<a href="/tags/network/">network</a>,&nbsp;<a href="/tags/socket/">socket</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">go</a>,&nbsp;<a href="/tags/slice/">slice</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/client-go/" class="prev" rel="prev" title="client-go 简单介绍和使用"><i class="fas fa-angle-left fa-fw"></i>client-go 简单介绍和使用</a>
-            <a href="/posts/unpbook2/" class="next" rel="next" title="[笔记]《Unix网络编程卷一》第二章">[笔记]《Unix网络编程卷一》第二章<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/unpbook3/" class="prev" rel="prev" title="[笔记]《Unix网络编程卷一》第三章"><i class="fas fa-angle-left fa-fw"></i>[笔记]《Unix网络编程卷一》第三章</a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

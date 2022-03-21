@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>slice - 标签 - 开发笔记</title>
+        <link>https://blog.7bao.fun/tags/slice/</link>
+        <description>slice - 标签 - 开发笔记</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 21 Mar 2022 18:48:25 &#43;0800</lastBuildDate><atom:link href="https://blog.7bao.fun/tags/slice/" rel="self" type="application/rss+xml" /><item>
+    <title>关于 go 语言中切片泄漏的例子</title>
+    <link>https://blog.7bao.fun/posts/slice-mem-leak/</link>
+    <pubDate>Mon, 21 Mar 2022 18:48:25 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.7bao.fun/posts/slice-mem-leak/</guid>
+    <description><![CDATA[Slice 使用误区 假设我们业务代码中用一个切片临时接收一个大数据，同时经过逻辑处理后使用 [m:n] 语法取出大切片的前10条数据供我们后续使用， 那么这个临时的]]></description>
+</item></channel>
+</rss>

@@ -4,6 +4,13 @@
         <link>https://blog.7bao.fun/tags/tcp/ip/</link>
         <description>TCP/IP - 标签 - 开发笔记</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="https://blog.7bao.fun/tags/tcp/ip/" rel="self" type="application/rss+xml" /><item>
+    <title>[笔记]《Unix网络编程卷一》第三章</title>
+    <link>https://blog.7bao.fun/posts/unpbook3/</link>
+    <pubDate>Sun, 20 Mar 2022 20:05:20 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.7bao.fun/posts/unpbook3/</guid>
+    <description><![CDATA[套接字编程 前两张讲的是网络编程的理论知识，这一章就是告诉我们，如何在用户空间内利用内核提供的套接字接口使用我们的 TCP\IP 协议 主机字节序和网络字节序]]></description>
+</item><item>
     <title>[笔记]《Unix网络编程卷一》第二章</title>
     <link>https://blog.7bao.fun/posts/unpbook2/</link>
     <pubDate>Sat, 12 Mar 2022 21:05:30 &#43;0800</pubDate>

@@ -3,19 +3,26 @@
         <title>Categories - 分类 - 开发笔记</title>
         <link>https://blog.7bao.fun/categories/</link>
         <description>Categories - 分类 - 开发笔记</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 15 Mar 2022 16:12:51 &#43;0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 21 Mar 2022 18:48:25 &#43;0800</lastBuildDate><atom:link href="https://blog.7bao.fun/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>go</title>
+    <link>https://blog.7bao.fun/categories/go/</link>
+    <pubDate>Mon, 21 Mar 2022 18:48:25 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.7bao.fun/categories/go/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>计算机网络</title>
+    <link>https://blog.7bao.fun/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+    <pubDate>Sun, 20 Mar 2022 20:05:20 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://blog.7bao.fun/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>kubernetes</title>
     <link>https://blog.7bao.fun/categories/kubernetes/</link>
     <pubDate>Tue, 15 Mar 2022 16:12:51 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://blog.7bao.fun/categories/kubernetes/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>计算机网络</title>
-    <link>https://blog.7bao.fun/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
-    <pubDate>Sat, 12 Mar 2022 21:05:30 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://blog.7bao.fun/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>docker</title>
